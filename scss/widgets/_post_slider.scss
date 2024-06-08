@@ -1,0 +1,22 @@
+/*.widget_slider*/
+
+.widget_slider {
+  h5:first-child {
+    font-family: "Poppins", sans-serif;
+    text-transform: none;
+    font-weight: 400;
+    line-height: 19px;
+    margin: 0px 0 5px;
+    color: $lightColor;
+    line-height: 30px;
+  }
+  .item-content{
+    padding: 15px 25px 25px;
+  }
+  .cat-links {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    margin-bottom: -4px;
+  }
+}
