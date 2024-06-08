@@ -1,0 +1,468 @@
+/* 
+** Template Specific Styles
+*/
+
+#box_wrapper > section,
+#box_wrapper > div > section {
+  overflow: hidden;
+}
+
+#box_wrapper > section.page_topline,
+#box_wrapper > section.page_toplogo,
+#box_wrapper > section.overflow-visible,
+#box_wrapper > div > section.overflow-visible {
+  overflow: visible;
+}
+
+
+//featured person on three different background sections
+img.absolute_image {
+  position: absolute;
+  z-index: 1;
+  top: 50px;
+}
+
+.image-rounded-cross-borders {
+  position: relative;
+  margin: 50px 0 60px;
+  &:before,
+  &:after {
+    content: '';
+    position: absolute;
+    width: 1px;
+    height: 30px;
+    background-color: $borderColor;
+    top: -30px;
+    left: 50%;
+  }
+  &:after {
+    top: auto;
+    bottom: -30px;
+  }
+  .box-shadow {
+    padding: 9px;
+    border-radius: 50%;
+    &:before,
+    &:after {
+      content: '';
+      position: absolute;
+      height: 1px;
+      width: 30px;
+      background-color: $borderColor;
+      top: 50%;
+      left: -30px;
+      @media(max-width: 1199px) {
+        display: none;
+      }
+    }
+    &:after {
+      left: auto;
+      right: -30px;
+    }
+  }
+  img {
+    border-radius: 50%;
+  }
+}
+
+.btn-action {
+  i {
+    width: 1em;
+    height: 1em;
+    text-align: center;
+    &.fa-chevron-right {
+      position: relative;
+      left: 2px;
+    }
+  }
+}
+
+.partners-carousel {
+  a {
+    opacity: 0.2;
+    &:hover {
+      opacity: 0.8;
+    }
+  }
+  .center a {
+    opacity: 1;
+  }
+}
+
+//topline and toplogo
+.dropdown-shopping-cart {
+  position: relative;
+  font-weight: 700;
+  .page_toplogo & {
+    margin-left: 24px;
+  }
+  i {
+    font-size: 28px;
+    padding-right: 14px;
+    .page_toplogo & {
+      position: relative;
+      top: 0.18em;
+    }
+  }
+  .badge {
+    position: absolute;
+    left: 24px;
+    .page_toplogo & {
+      top: -0.3em;
+    }
+    padding: .28em .5em .2em;
+    border-radius: 1em;
+  }
+  &:hover {
+    color: inherit;
+  }
+
+  & + .dropdown-menu {
+    @media (min-width: 576px) {
+      min-width: 430px;
+    }
+    margin-top: 50px;
+  }
+}
+
+.header_absolute {
+  &.cover-background,
+  &.s-parallax {
+    background-image: url("../images/parallax/video_section_background.jpg");
+  }
+}
+.contact-info{
+  &.ds{
+    border-bottom: 1px solid rgba(128, 128, 128, 0.2);
+  }
+  &.cover-background,
+  &.s-parallax {
+    background: url("../images/parallax/footer_bg.jpg") no-repeat fixed center;
+    background-size: cover;
+  }
+}
+
+.faq-section-left{
+  background: url("../images/gallery/15.jpg") no-repeat center / cover;
+  position: relative;
+  height: 100%;
+  .faq-video{
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    &:after{
+
+    }
+  }
+}
+
+.faq-section-right{
+  padding: 50px 255px 25px 86px;
+  @media(max-width: 1200px){
+    padding: 30px;
+  }
+  @media(max-width: 768px){
+    padding-bottom: 60px;
+    padding-top: 0;
+  }
+}
+.page_title {
+  &.cover-background,
+  &.s-parallax {
+    background-image: url("../images/parallax/breadcrumbs.jpg");
+  }
+  h1,
+  h2 {
+    margin-bottom: 0.2em;
+    line-height: 1;
+    font-size: 40px;
+    text-transform: none;
+    word-wrap: break-word;
+    line-height: 1.25;
+    font-weight: 400;
+    letter-spacing: 0px;
+    @media(min-width: 992px) {
+      font-size: 40px;
+      text-transform: none;
+      word-wrap: break-word;
+      line-height: 1.25;
+      font-weight: 400;
+      letter-spacing: 0px;
+      &:last-child {
+        margin-bottom: 0;
+      }
+    }
+  }
+  .small-title {
+    margin-bottom: 0;
+    & + .breadcrumb {
+      font-size: 16px;
+      letter-spacing: 0;
+      text-transform: none;
+      font-weight: 300;
+    }
+  }
+  @media (min-width: 992px) {
+    .title-inline {
+      margin: 0;
+      & + .breadcrumb {
+        padding-left: 30px;
+        margin-left: 30px;
+        border-left: 1px solid $universalBorderColor;
+      }
+    }
+  }
+  .breadcrumb {
+    line-height: 1.6;
+  }
+  [class*="container"] > .breadcrumb {
+    position: absolute;
+    right: 15px;
+    bottom: 0;
+    padding: 0 15px;
+    background-color: $borderColorRGBA;
+  }
+}
+
+.page_404 {
+  background-image: url("../images/404.jpg");
+}
+.about-section{
+  background-image: url("../images/parallax/about_section_background.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: 50% -10%;
+}
+.ds.coming-soon{
+  background-image: url("../images/parallax/footer_bg.jpg");
+  input{
+    background-color: $darkgreyColor;
+  }
+}
+.team-section{
+  background-image: url("../images/parallax/team-section.jpg");
+  background-repeat: no-repeat;
+  -webkit-background-size: cover;
+  background-size: cover;
+}
+.program-section{
+  background-image: url("../images/parallax/programs-bg.jpg");
+  background-repeat: no-repeat;
+  -webkit-background-size: cover;
+  background-size: cover;
+}
+.page_map {
+  height: 600px;
+  text-align: center;
+  .marker {
+    display: none;
+  }
+
+}
+.page_map.map-small{
+  height: 460px;
+}
+.page_map.main-map{
+  height: 500px;
+}
+.map_marker_description {
+  h3 {
+    line-height: 1;
+    margin-bottom: 10px;
+  }
+  max-width: 270px;
+  img {
+    max-width: 90% !important;
+  }
+}
+
+//styling google info window
+.gm-style .gm-style-iw {
+  overflow: visible !important;
+  text-align: center;
+  line-height: 1.6em;
+
+  & > *:first-child {
+    position: relative;
+  }
+
+  &:before {
+    content: '';
+    display: block;
+    position: absolute;
+    border-top: 2px solid $colorMain;
+    top: -25px;
+    left: -16px;
+    right: -16px;
+    bottom: -25px;
+    background: $darkgreyColor;
+    box-shadow: $boxShadow;
+  }
+
+  .icon-inline {
+    display: inline-block;
+    margin: 0.3em 0;
+    .icon-styled {
+      margin-right: 5px;
+
+    }
+  }
+}
+
+/*footer social buttons that hidden on half of their height*/
+.page_footer {
+
+  //for hidden social icons
+  overflow: hidden;
+
+  &.s-parallax {
+    background-image: url("../images/parallax/footer_bg.jpg");
+    @media (max-width: 1200px) {
+      background-attachment: scroll;
+      background-position: 50% 19%!important;
+      -webkit-background-size: cover;
+      background-size: cover;
+    }
+  }
+
+
+  /*overriding Bootstrap Addons buttons*/
+  @media (min-width: 576px) {
+    a.border-icon:before,
+    a.bg-icon:before,
+    a.color-bg-icon:before {
+      width: 2.8em;
+      height: 2.8em;
+      line-height: 2.8em;
+    }
+  }
+
+  .side-icon-box {
+    margin: 0 0 20px;
+    & > .icon-styled:first-child {
+      margin-right: 0;
+      position: relative;
+      //top: 0.5em;
+    }
+
+    .icon-styled + .media-body {
+      margin-left: 20px;
+    }
+  }
+
+  .col-md-12 {
+    .widget_social_buttons {
+      margin-bottom: 0;
+      margin-top: 10px;
+      a {
+        margin: 0 3px 0px;
+        @media (min-width: 1200px) {
+          margin-bottom: 0;
+          &:hover {
+          }
+        }
+      }
+    }
+  }
+}
+
+.page_copyright {
+  font-size: 16px;
+  font-weight: 300;
+  line-height: 30px;
+  &.cover-background,
+  &.s-parallax {
+    background-image: url("../images/parallax/breadcrumbs.jpg");
+  }
+}
+
+//team hover info for .media-item
+.item-hover-content {
+  position: relative;
+  overflow: hidden;
+  .item-media {
+    z-index: 2;
+  }
+
+  .item-content {
+    position: absolute;
+    right: 0;
+    left: 0;
+    box-shadow: $boxShadow;
+
+    h4 {
+      line-height: 1;
+      letter-spacing: 0.15em;
+      margin-bottom: 1.4em;
+      span {
+        font-weight: 900;
+      }
+    }
+  }
+  //overriding default media item content padding on big screens
+  &.content-padding .item-content {
+    @media (min-width: 1200px) {
+      padding: 54px 40px;
+    }
+  }
+  &:hover {
+    overflow: visible;
+    z-index: 3;
+    box-shadow: $boxShadow;
+  }
+}
+
+.content-show-hover {
+  overflow: hidden;
+  .item-content {
+    top: 0;
+    opacity: 0;
+    transform: scale(1.2);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    transition: all 0.15s ease-in-out;
+    h4 {
+      line-height: 1;
+      letter-spacing: 0.15em;
+      margin-bottom: 1.4em;
+      span {
+        display: block;
+        font-weight: 900;
+      }
+    }
+  }
+  &:hover {
+    box-shadow: $boxShadow;
+    .item-content {
+      transform: scale(1);
+      opacity: 1;
+    }
+  }
+}
+
+//regular gallery item with absolute content and scaling header
+.item-gallery {
+  overflow: hidden;
+  position: relative;
+  background: transparent;
+
+  .item-content {
+    h4, h5 {
+      z-index: 5;
+      transition: all 0.15s ease-in-out;
+      opacity: 0;
+      transform: scale(0);
+    }
+  }
+
+  //hover styles
+  &:hover {
+    .item-content h4, .item-content h5 {
+      transform: scale(1);
+      opacity: 1;
+    }
+  }
+}

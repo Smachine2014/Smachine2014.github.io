@@ -1,0 +1,88 @@
+/*
+** Buttons
+ */
+.btn:hover {
+  cursor: pointer;
+}
+.btn +.btn{
+  margin-left: 20px;
+  @media(max-width: 394px){
+    margin-left: 0;
+
+  }
+  @media(max-width: 374px){
+    margin-top: 20px;
+
+  }
+}
+.btn.focus,
+.btn:focus {
+  box-shadow: 0 0 3px 0 rgba(100, 100, 100, .75);
+}
+
+.btn-secondary {
+  border-color: $borderColor;
+  color: $darkgreyColor;
+}
+
+/*color background buttons*/
+.btn-maincolor,
+.btn-maincolor2,
+.btn-maincolor3,
+.btn-darkgrey {
+  color: $lightColor;
+  border: 2px solid $colorMain;
+  padding: 21px 39px;
+}
+
+.btn-maincolor {
+  background-color: $colorMain;
+}
+
+.btn-maincolor2 {
+  background-color: $colorMain2;
+}
+
+.btn-maincolor3 {
+  background-color: $colorMain3;
+}
+
+.btn-darkgrey {
+  background-color: $darkgreyColor;
+}
+
+/*color outline buttons*/
+.btn-outline-maincolor,
+.btn-outline-maincolor2,
+.btn-outline-maincolor3{
+  background-color:transparent;
+  color:$lightColor;
+  border: 2px solid $colorMain;
+  padding: 21px 39px;
+}
+
+.btn-outline-darkgrey{
+  color:$colorMain;
+  background-color: $lightColor;
+  border: 2px solid $darkgreyColor;
+  padding: 21px 39px
+}
+.btn-outline-maincolor {
+
+  border-color: $colorMain;
+}
+
+.btn-outline-maincolor2 {
+
+  border-color: $colorMain2;
+}
+
+.btn-outline-maincolor3 {
+
+  border-color: $colorMain3;
+}
+
+.btn-outline-darkgrey {
+  color: $darkgreyColor;
+  border-color: $darkgreyColor;
+}
