@@ -1,0 +1,8 @@
+dark background
+#0a0d1b
+
+background
+#13182a
+
+main color
+#e43d4e

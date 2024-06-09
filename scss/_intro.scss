@@ -1,0 +1,416 @@
+/* 
+** Intro Section Styles
+*/
+
+.page_slider {
+  &.blog-slider{
+    img{
+      opacity: 0.5;
+    }
+    .flex-direction-nav{
+      display: none;
+    }
+    @media (max-width: 768px){
+      .flex-control-nav {
+        bottom: 139px;
+      }
+    }
+
+  }
+  position: relative;
+  overflow: hidden;
+  //fix slider bug on small screens
+  clear: both;
+  & > img {
+    width: 100%;
+  }
+
+  h2 {
+    font-size: 3em;
+    margin: 0;
+    line-height: 1;
+  }
+  h3 {
+    font-size: 2em;
+    margin: 0;
+    line-height: 1;
+  }
+  h4 {
+    font-size: 1.5em;
+    margin: 0;
+  }
+  p {
+    font-size: 1.2em;
+    margin: 0;
+  }
+
+  @media(min-width: 992px) {
+    h2 {
+      font-size: 6em;
+    }
+    h3 {
+      font-size: 3em;
+    }
+    h4 {
+      font-size: 2.5em;
+    }
+    p {
+      font-size: 1.7em;
+    }
+  }
+  .flex-direction-nav .flex-prev, .flex-direction-nav .flex-next{
+    top: 56%;
+    @media (max-width: 1250px) {
+      display: none;
+    }
+  }
+  .flex-direction-nav .flex-prev {
+    left: 9%;
+    color:#fff;
+    opacity: 0.5;
+    @media(max-width: 1550px){
+      left: 4%;
+    }
+    @media(max-width: 1400px){
+      left:1%;
+    }
+    &:before{
+      font-size: 44px;
+      color:$lightColor;
+
+    }
+    &:hover{
+      &:before{
+      color:$lightColor;
+    }
+    }
+  }
+  .flex-direction-nav .flex-next {
+    right: 9%;
+    color:#fff;
+    opacity: 0.5;
+    @media(max-width: 1550px){
+      right: 4%;
+    }
+    @media(max-width: 1400px){
+      right:1%;
+    }
+    &:before{
+      font-size: 44px;
+      color:$lightColor;
+    }
+    &:hover{
+      &:before{
+        color:$lightColor;
+      }
+    }
+  }
+
+  .flexslider {
+    //making every slide same height (stretch) for nice background on every slide
+
+    .slides {
+      display: flex;
+    }
+
+    //ie bugfix with page_slider overlap
+    &:before,
+    &:after {
+      content: '';
+      display: block;
+      clear: both;
+    }
+
+    .intro_layer img {
+      width: auto;
+      display: inline-block;
+    }
+
+    //uncomment if you need a shadow on your slider
+    &.slider-shadow {
+      padding-bottom: 50px;
+      &:before,
+      &:after {
+        content: "";
+        position: absolute;
+        background: transparent;
+        z-index: 1;
+        bottom: 65px;
+        left: 10px;
+        width: 50%;
+        height: 20%;
+        max-width: 400px;
+        box-shadow: 0 25px 20px rgba(0, 0, 0, 0.3);
+        transform: rotate(-3deg);
+      }
+      &:after {
+        right: 10px;
+        left: auto;
+        transform: rotate(3deg);
+      }
+    }
+  }
+
+  .intro_layers_wrapper {
+    display: flex;
+  }
+
+  .intro_layers {
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    justify-content: center;
+    padding: 20px 0;
+    @media(max-width: 768px){
+      align-items: flex-start;
+    }
+  }
+
+  //dots - horizontal
+  .flex-control-nav {
+    position: absolute;
+    width: 100%;
+    bottom: 27px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+
+    @media (max-width: 768px) {
+      top: -33px;
+      position: relative;
+    }
+    @media (max-width: 390px) {
+
+
+    }
+    li {
+      display: block;
+      padding-top: 6px;
+      padding-bottom: 6px;
+      a {
+        border-color: transparent;
+        background:transparent;
+        opacity: 1;
+        font: 400 16px/1em 'Oswald';
+        color: $lightColor;
+        position: relative;
+        width: 20px;
+        height: 20px;
+        transition:transform 0.3s ease-in;
+        @media (max-width: 768px) {
+          font-size: 14px;
+        }
+        &:hover{
+          color:$colorMain;
+          transform:translateY(-10px) scale(1.5);
+          @media (max-width: 768px) {
+            transform:translateY(-5px) scale(1.2);
+          }
+        }
+        &:before{
+          content:'0';
+          position: absolute;
+          top: 0%;
+          left: -4px;
+          @media (max-width: 768px) {
+            left: -2px;
+          }
+
+        }
+        &:after{
+          content: '';
+          height: 0;
+          transition:height 0.3s ease-in;
+        }
+        &.flex-active {
+          color:$colorMain;
+         transform:translateY(-10px) scale(1.5);
+          @media (max-width: 768px) {
+            transform:translateY(-5px) scale(1.2);
+          }
+
+          &:before{
+            top: 2%;
+          }
+          &:after{
+            background-color: $lightColor;
+            content: '';
+
+            position: absolute;
+            left: 23%;
+
+
+            bottom: -26px;
+            height: 17px;
+
+            width: 1px;
+            @media (max-width: 768px) {
+              display: none;
+            }
+
+
+          }
+        }
+      }
+    }
+  }
+
+  //lg and bigger layout
+  @media(min-width: 300px) {
+
+    .cs,
+    .ds {
+      background-color: transparent;
+    }
+
+    //description alignment
+    //for intro with testimonials,
+    //for static intro
+    //.flexslider prefix removed
+    .container-fluid,
+    .container,
+    img + .container {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      margin-left: auto;
+      margin-right: auto;
+      color: #000;
+      @media(max-width: 768px){
+        position: static;
+      }
+
+    }
+
+    [class*="col-"] {
+      position: static;
+      min-height: 0;
+      margin-top: 0;
+      margin-bottom: 0;
+
+    }
+
+    // center alignment for slide description
+    .intro_layers_wrapper {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      right: 15px;
+      left: 15px;
+      height: 100%;
+      z-index: 5;
+      @media(max-width: 768px){
+        .intro_before_featured_word{
+          display: none;
+        }
+        .intro_layer.button{
+          display: none;
+        }
+        h2:after{
+          display: none;
+        }
+        h2{
+          text-align: left;
+          font-size: 20px;
+        }
+      }
+      @media (min-width: 600px) {
+        .boxed & {
+          padding-left: 60px;
+          padding-right: 60px;
+        }
+      }
+    }
+
+
+
+    .intro_before_featured_word {
+      line-height: 30px;
+      font-size: 20px;
+      margin-top: 0;
+      margin-bottom: 2.6em;
+      color:$lightColor;
+      text-align: left;
+      @media(max-width: 992px){
+        font-size: 16px;
+        margin-bottom: 1em;
+      }
+
+
+    }
+    .intro_button{
+      @media(max-width: 768px){
+        min-width: 100px;
+        padding: 20px;
+      }
+    }
+
+
+    .intro_featured_word {
+      line-height: 1.1;
+      white-space: nowrap;
+      font-size: 50px;
+      margin-bottom: 20px;
+      @media(max-width: 992px){
+        font-size: 30px;
+      }
+      @media(max-width: 768px){
+        font-size: 25px;
+        text-align: center;
+        margin-top: 10px;
+        &:after{
+          left: 50%;
+          transform: translateX(-50%);
+        }
+      }
+    }
+
+    .intro_after_featured_word {
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1em;
+      text-shadow: 0 0 4px rgba(0, 0, 0, 0.4);
+    }
+
+  }
+
+  @media (min-width: 992px) {
+
+
+
+    .intro_layers_wrapper {
+      padding: 100px 0;
+    }
+
+    .intro_before_featured_word {
+
+    }
+    .intro_featured_word {
+      font-size: 48px;
+      font-weight: 400;
+      font-family: "Oswald", sans-serif;
+      letter-spacing: 2.4px;
+      line-height: 48px;
+      margin-bottom: 40px;
+    }
+
+    .intro_after_featured_word {
+      font-size: 12px;
+      letter-spacing: 2em;
+    }
+  }
+
+  @media (min-width: 1600px) {
+
+  }
+
+  //md and smaller - static container on small device
+  @media (max-width: 991px) {
+    & {
+      text-align: center;
+    }
+  }
+}
