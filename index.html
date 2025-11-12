@@ -27,6 +27,46 @@
 	<link rel="stylesheet" href="css/animations.css">
 	<link rel="stylesheet" href="css/font-awesome.css">
 	<link rel="stylesheet" href="css/main.css" class="hidden color-switcher-link">
+	<style>
+		/* Responsive map wrapper - keeps 4:3 aspect ratio and fills container width */
+		/* Responsive map wrapper - uses 16:9 aspect ratio and supports full-bleed */
+		/* Map sizing: limit vertical footprint using viewport heights.
+		   We avoid using only padding-bottom so we can cap height with vh. */
+		.map-responsive {
+			position: relative;
+			width: 100%;
+			height: 500px; /* Fixed reasonable height for desktop */
+			overflow: hidden;
+		}
+		.map-responsive iframe {
+			position: absolute;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 100%;
+			display: block;
+			border: 0;
+		}
+		/* Make a full-bleed container that breaks out of the normal page gutters */
+		.map-fullwidth {
+			position: relative;
+			left: 50%;
+			right: 50%;
+			margin-left: -50vw;
+			margin-right: -50vw;
+			width: 100vw;
+			max-width: 100vw;
+		}
+		/* Let the map section flow naturally without arbitrary margins. */
+		#lowerqinfo { margin-bottom: 0; position: relative; z-index: 0; }
+
+		@media (max-width: 1200px) {
+			.map-responsive { height: 450px; }
+		}
+		@media (max-width: 768px) {
+			.map-responsive { height: 350px; }
+		}
+	</style>
 	<script src="js/vendor/modernizr-custom.js"></script>
 
 	<!--[if lt IE 9]>
@@ -73,7 +113,7 @@
 						<div class="row align-items-center">
 							<div class="col-xl-2 col-lg-3 col-11">
 								<a href="./index.html" class="logo">
-									<img src="images/logo.png" alt="North Shore Judo Logo">
+									<img src="images/new/logo.webp" alt="North Shore Judo Logo">
 								</a>
 							</div>
 							
@@ -117,7 +157,7 @@
 					<div class="flexslider">
 						<ul class="slides">
 							<li class="ds text-left">
-								<img src="images/slide01new.jpg" alt="">
+								<img src="images/new/slide01new.webp" alt="">
 								<div class="container">
 									<div class="row">
 										<div class="col-md-12">
@@ -150,7 +190,7 @@
 							</li>
 
 							<li class="ds text-left">
-								<img src="images/sized_oldsite_location_picture.jpg" alt=""> <!-- slide 02 slide2 slide02 -->
+								<img src="images/new/sized_oldsite_location_picture.webp" alt=""> <!-- slide 02 slide2 slide02 -->
 								<div class="container">
 									<div class="row">
 										<div class="col-md-12">
@@ -178,7 +218,7 @@
 									</div><!-- eof .row -->
 								</div><!-- eof .container-fluid -->
 							<li class="ds text-left">
-								<img src="images/sized_parkingspace.jpg" alt=""> <!-- slide 03 slide3 slide03 -->
+								<img src="images/new/sized_parkingspace.webp" alt=""> <!-- slide 03 slide3 slide03 -->
 								<div class="container">
 									<div class="row">
 										<div class="col-md-12">
@@ -252,8 +292,8 @@
 							</div>
 						</div>
 
-						<!-- PLACEHOLDER -->
-						<div class="col-12 col-md-4 text-center">
+						<!-- PLACEHOLDER (hidden on mobile for spacing) -->
+						<div class="col-12 col-md-4 text-center d-none d-md-block">
 							<div class="icon-box icon-absolute text-center">
 								<div class="icon-styled">
 								</div>
@@ -322,7 +362,7 @@
 								<!-- PEE WEES -->
 								<div class="vertical-item text-center">
 									<div class="item-media">
-										<img width="370" height="230" src="images/gallery/peewees_class.jpg" alt="">
+										<img width="370" height="230" src="images/new/peewees_class.webp" alt="">
 										<div class="media-links">
 											<!-- <a class="abs-link" title="" href="service-single.html"></a> -->
 										</div>
@@ -336,7 +376,7 @@
 										</h5>
 										<span>4-6 years old</span>
 										<p>
-											6:00-6:30 PM <br> TUESDAY <br> $100 / TERM
+											6:00-6:30 PM <br> TUESDAY <br> $36 / mo
 										</p>
 										<!-- <div class="services-link">
 											<a><i class="fa fa-angle-down" aria-hidden="true"></i></a>
@@ -346,7 +386,7 @@
 								<!-- JUNIORS -->
 								<div class="vertical-item text-center">
 									<div class="item-media">
-										<img width="370" height="230" src="images/gallery/juniors_class.jpg" alt="">
+										<img width="370" height="230" src="images/new/juniors_class.webp" alt="">
 										<div class="media-links">
 											<!-- <a class="abs-link" title="" href="service-single.html"></a> -->
 										</div>
@@ -360,7 +400,7 @@
 										</h5>
 										<span>7-14 years old</span>
 										<p>
-											6:45-7:45 PM <br> TUESDAY &amp; THURSDAY <br> $200 / TERM
+											6:45-7:45 PM <br> TUESDAY &amp; THURSDAY <br> $73 / mo
 										</p>
 										<!-- <div class="services-link">
 											<a><i class="fa fa-angle-down" aria-hidden="true"></i></a>
@@ -385,21 +425,34 @@
 										</h5>
 										<span>15+ years old</span>
 										<p>
-											
-										</p>8:00-10:00 PM <br> TUESDAY &amp; THURSDAY <br> $200 / TERM
+											8:00-10:00 PM <br> TUESDAY &amp; THURSDAY <br> $73 / mo
+										</p>
 										<!-- <div class="services-link">
 											<a><i class="fa fa-angle-down" aria-hidden="true"></i></a>
 										</div> -->
 									</div>
 								</div>
 							</div>
+							</div>
+							<div class="divider-30 d-none d-xl-block"></div>
+							<div class="container">
+								<div class="row justify-content-center">
+									<div class="col-12 text-center">
+										<p class="small-text color-light mb-4 mx-auto" style="padding-top:20px; max-width:900px;">Prices shown are per month, for a 3-month term.</p>
+									</div>
+								</div>
+							</div>
 
-							<div style="margin: 64px 5% 0px;" class="row justify-content-center">
-								<a href="https://docs.google.com/forms/u/1/d/e/1FAIpQLScAXHX0pTa7L9_IJdSyypjLgp_ITPL0TgCcI-Cppdu9Wahhug/viewform" target="_blank" class="btn btn-maincolor btn-lg btn-block">Sign up for a class</a>
+							<div class="container" style="margin-top:48px;">
+								<div class="row justify-content-center">
+									<div class="col-12 col-md-4 text-center mx-auto">
+										<a href="https://northshorejudo.co.nz/join?src=website" target="_blank" class="btn btn-maincolor btn-lg btn-block">Sign up now</a>
+									</div>
+								</div>
 							</div>
-							<div style="margin: 20px 5% 2%;" class="row justify-content-center">
+							<!-- <div style="margin: 20px 5% 2%;" class="row justify-content-center">
 								<a href="https://docs.google.com/forms/d/e/1FAIpQLSePAAWoK5eHbH834hjjfoCBr9D4SgiFhkHsqAScoe51rJ3XCA/viewform" target="_blank" class="btn btn-darkgrey btn-lg btn-block">Learn more about self defence classes</a>
-							</div>
+							</div> -->
 						</div>
 						<div class="divider-70 d-none d-xl-block"></div>
 					</div>
@@ -537,57 +590,13 @@
 				</div>
 			</section>
 
-			<!-- MAP -->
-			<!-- #TODO fix weird bars on address marker popup? removing class 'gm-style-iw-d' fixes but class cant be found anywhere-->
-			<section id="lowerqinfo" class="ds ms page_map main-map" data-draggable="false" data-scrollwheel="false">
-				<div class="marker">
-					<!-- #TODO review formatting for address -->
-					<div class="marker-address">Level 1/34 Barrys Point Road, Takapuna, North Shore 0622, New Zealand</div>
-					<div class="marker-title">Come say hi</div>
-					<div class="marker-description">
-
-						<ul class="list-unstyled">
-							<li>
-							<span class="icon-inline">
-									<span class="icon-styled color-main">
-										<i class="fa fa-map-marker"></i>
-									</span>
-
-									<span>
-										Level 1 @ 34 Barrys Point Road, Takapuna
-									</span>
-								</span>
-							</li>
-
-							<li>
-								<span class="icon-inline">
-									<span class="icon-styled color-main">
-										<i class="fa fa-phone"></i>
-									</span>
-
-									<span>
-										+64 278910027
-									</span>
-								</span>
-							</li>
-							<li>
-								<span class="icon-inline">
-									<span class="icon-styled color-main">
-										<i class="fa fa-envelope"></i>
-									</span>
-
-									<span>
-										northshorejudo@gmail.com
-									</span>
-								</span>
-							</li>
-						</ul>
+			<!-- MAP (responsive full-bleed embed) -->
+			<section id="lowerqinfo" class="ds ms page_map main-map">
+				<div class="map-fullwidth">
+					<div class="map-responsive">
+						<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3977.182354293471!2d174.76535529999998!3d-36.7931447!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x6d0d396d0225b74d%3A0xf376fb3dddb583a!2sLive%20to%20Judo%20-%20North%20Shore%20Judo!5e1!3m2!1sen!2snz!4v1762939214413!5m2!1sen!2snz" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
 					</div>
-
-					<img class="marker-icon" src="/images/map_marker_icon_custom.png" alt="">
 				</div>
-				<!-- .marker -->
-
 			</section>
 
 			<!-- LOWER QUICK INFO -->
@@ -631,8 +640,8 @@
 							</div>
 						</div>
 
-						<!-- PLACEHOLDER -->
-						<div class="col-12 col-md-4 text-center">
+						<!-- PLACEHOLDER (hidden on mobile for spacing) -->
+						<div class="col-12 col-md-4 text-center d-none d-md-block">
 							<div class="icon-box icon-absolute text-center">
 								<div class="icon-styled">
 								</div>
@@ -671,19 +680,19 @@
 								<ul>
 									<li>
 										<a href="https://www.ijf.org/?ref=northshorejudo">
-											<img src="/images/IJF-logo.png" alt="IJF logo" width="64" height="64">
+											<img src="/images/new/IJF-logo.webp" alt="IJF logo" width="64" height="64">
 											<br><br>International Judo Federation
 										</a>
 									</li>
 									<li>
 										<a href="https://www.judonz.org/?ref=northshorejudo">
-											<img src="/images/nzjffernw-logo.png" alt="NZJF logo" width="64" height="64">
+											<img src="/images/new/nzjffernw-logo.webp" alt="NZJF logo" width="64" height="64">
 											<br><br>New Zealand Judo Federation
 										</a>
 									</li>
 									<li>
 										<a href="https://www.judoauckland.co.nz/?ref=northshorejudo">
-											<img src="/images/akljudo-logo.png" alt="AKL Judo logo" width="64" height="64">
+											<img src="/images/new/akljudo-logo.webp" alt="AKL Judo logo" width="64" height="64">
 											<br><br>Auckland Judo Association
 									</li>
 								</ul>
@@ -694,7 +703,7 @@
 						<div class="col-md-6 col-lg-4 text-center animate" data-animation="fadeInUp">
 							<div class="widget widget_icons_list">
 								<a href="./" class="logo flex-column text-center">
-									<img src="images/logo.png" alt="logo">
+									<img src="images/new/logo.webp" alt="logo">
 								</a>
 								<p>The North Shore Judo Academy was founded in 1969 by Sensei Ron Jones (5th dan) and has shared a love of Judo with thousands of players in that time, including the current coaching team.</p>
 								<!-- <div class="widget widget_social_buttons">
@@ -772,8 +781,6 @@
 	<script src="js/main.js"></script>
 
 
-	<!-- Google Map Script -->
-	<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?callback=templateInitGoogleMap&key=AIzaSyAdCWn-s9JY1DZZsFTVVp0nReZ-GVOFg78"></script>
 
 </body>
 
