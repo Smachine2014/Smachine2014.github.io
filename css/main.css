@@ -2,9 +2,8 @@
 
 @import url("../fonts/rawline/rawline.css");
 
-@import url("https://fonts.googleapis.com/css?family=Oswald:200,300,400,500,600,700");
-
-@import url("https://fonts.googleapis.com/css?family=Poppins:200,200i,300,300i,400,400i,500,500i,600,600i,700");
+/* Google Fonts are loaded via <link> in the HTML with display=swap to avoid render-blocking @import
+	Removed the @import rules to prevent blocking CSS downloads and duplicated requests. */
 /**
 *** Table Of Contents
 **/
@@ -16564,13 +16563,50 @@ body.active-side-header.slide-right .page_header_side {
 
 	/* tighten spacing so content fits nicely */
 	.page_slider .intro_layers_wrapper .intro_before_featured_word {
-		margin-bottom: 0.8em;
+		margin-bottom: 0.75em;
 	}
 
 	.page_slider .intro_button {
-		padding: 14px 18px;
-		min-width: 140px;
+		padding: 10px 14px;
+		min-width: 120px;
 		font-size: 12px;
+		margin-top: 10px;
+	}
+
+	/* Hide numeric slide indicators (01, 02, 03) on mobile */
+	.page_slider .flex-control-nav,
+	.page_slider .flex-custom-nav {
+		display: none !important;
+	}
+}
+
+/* Stronger mobile button isolation to avoid global .btn padding from other files */
+@media (max-width: 768px) {
+	.page_slider .intro_layers_wrapper .intro_layer.button {
+		/* give the button some breathing room outside */
+		display: block !important;
+		margin: 18px 0 8px 0 !important;
+		text-align: left;
+		z-index: 6;
+	}
+
+	.page_slider .intro_button,
+	.page_slider .intro_layer.button .btn {
+		/* override heavier global button padding */
+		padding: 8px 14px !important;
+		font-size: 13px !important;
+		line-height: 1 !important;
+		min-width: 0 !important;
+		width: auto !important;
+		display: inline-block !important;
+		margin: 12px 0 0 0 !important;
+		border-width: 2px !important;
+		box-sizing: border-box !important;
+	}
+
+	/* If the button is too wide due to block rules elsewhere, cap it */
+	.page_slider .intro_button {
+		max-width: 220px !important;
 	}
 }
 
@@ -16626,9 +16662,9 @@ body.active-side-header.slide-right .page_header_side {
 
 @media (min-width: 300px) and (max-width: 768px) {
 	.page_slider .intro_featured_word {
-		font-size: 25px;
+		font-size: 26px;
 		margin-top: 10px;
-		text-align: center;
+		text-align: left;
 	}
 
 	.page_slider .intro_featured_word:after {
@@ -17338,14 +17374,12 @@ h4.entry-title {
 }
 
 .comments-area .comment-list ol.children ol.children ol.children {
-	padding-left: 35px;
+    padding-left: 35px;
 }
 
 .comment-body {
-	margin-bottom: 0;
-	margin-left: 70px;
-	padding: 10px 0px 20px 20px;
-	position: relative;
+    margin-bottom: 0;
+    margin-left: 70px;
 }
 
 .comment-body ol,

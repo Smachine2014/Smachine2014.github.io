@@ -23,10 +23,31 @@
 	<link rel="manifest" href="images/site/site.webmanifest">
 
 	<!-- IMPORTS -->
-	<link rel="stylesheet" href="css/bootstrap.min.css">
-	<link rel="stylesheet" href="css/animations.css">
-	<link rel="stylesheet" href="css/font-awesome.css">
-	<link rel="stylesheet" href="css/main.css" class="hidden color-switcher-link">
+	<!-- Preconnects for font delivery and third-party origins -->
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+	<!-- Preload critical font assets and LCP image to make them discoverable early -->
+	<link rel="preload" href="/fonts/fontawesome-webfont.woff2?v=4.7.0" as="font" type="font/woff2" crossorigin>
+	<link rel="preload" href="images/new/slide01new.webp" as="image">
+
+	<!-- Load Google Fonts with display=swap (avoids invisible text) -->
+	<link href="https://fonts.googleapis.com/css?family=Oswald:200,300,400,500,600,700&display=swap" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Poppins:200,200i,300,300i,400,400i,500,500i,600,600i,700&display=swap" rel="stylesheet">
+
+	<!-- Preload CSS then apply onload to avoid render-blocking while still loading stylesheet early -->
+	<link rel="preload" href="css/bootstrap.min.css" as="style" onload="this.rel='stylesheet'">
+	<link rel="preload" href="css/animations.css" as="style" onload="this.rel='stylesheet'">
+	<link rel="preload" href="css/font-awesome.css" as="style" onload="this.rel='stylesheet'">
+	<link rel="preload" href="css/main.css" as="style" onload="this.rel='stylesheet'">
+
+	<!-- Fallback for users with JavaScript disabled -->
+	<noscript>
+		<link rel="stylesheet" href="css/bootstrap.min.css">
+		<link rel="stylesheet" href="css/animations.css">
+		<link rel="stylesheet" href="css/font-awesome.css">
+		<link rel="stylesheet" href="css/main.css" class="hidden color-switcher-link">
+	</noscript>
 	<style>
 		/* Responsive map wrapper - keeps 4:3 aspect ratio and fills container width */
 		/* Responsive map wrapper - uses 16:9 aspect ratio and supports full-bleed */
@@ -157,7 +178,7 @@
 					<div class="flexslider">
 						<ul class="slides">
 							<li class="ds text-left">
-								<img src="images/new/slide01new.webp" alt="">
+								<img src="images/new/slide01new.webp" alt="North Shore Judo — training LCP image" width="933" height="525" fetchpriority="high" loading="eager">
 								<div class="container">
 									<div class="row">
 										<div class="col-md-12">
@@ -777,8 +798,8 @@
 	</div><!-- eof #canvas -->
 
 
-	<script src="js/compressed.js"></script>
-	<script src="js/main.js"></script>
+	<script src="js/compressed.js" defer></script>
+	<script src="js/main.js" defer></script>
 
 
 
