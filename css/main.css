@@ -16554,6 +16554,26 @@ body.active-side-header.slide-right .page_header_side {
 	}
 }
 
+/* Mobile fixes: show subtitle and CTA on small screens */
+@media (max-width: 768px) {
+	/* previously hidden in an earlier rule; override here */
+	.page_slider .intro_layers_wrapper .intro_before_featured_word,
+	.page_slider .intro_layers_wrapper .intro_layer.button {
+		display: block !important;
+	}
+
+	/* tighten spacing so content fits nicely */
+	.page_slider .intro_layers_wrapper .intro_before_featured_word {
+		margin-bottom: 0.8em;
+	}
+
+	.page_slider .intro_button {
+		padding: 14px 18px;
+		min-width: 140px;
+		font-size: 12px;
+	}
+}
+
 @media (min-width: 300px) and (min-width: 600px) {
 	.boxed .page_slider .intro_layers_wrapper {
 		padding-left: 60px;
