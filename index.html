@@ -42,10 +42,11 @@
 
 
 	<!-- ICONS -->
-	<link rel="apple-touch-icon" sizes="180x180" href="images/site/apple-touch-icon.png">
-	<link rel="icon" type="image/png" sizes="32x32" href="images/site/favicon-32x32.png">
-	<link rel="icon" type="image/png" sizes="16x16" href="images/site/favicon-16x16.png">
-	<link rel="manifest" href="images/site/site.webmanifest">
+	<link rel="icon" href="/images/site/favicon.ico" sizes="any">
+	<link rel="icon" type="image/png" sizes="32x32" href="/images/site/favicon-32x32.png">
+	<link rel="icon" type="image/png" sizes="16x16" href="/images/site/favicon-16x16.png">
+	<link rel="apple-touch-icon" sizes="180x180" href="/images/site/apple-touch-icon.png">
+	<link rel="manifest" href="/images/site/site.webmanifest">
 
 	<!-- IMPORTS -->
 	<!-- Preconnects for font delivery and third-party origins -->
@@ -62,18 +63,17 @@
 		href="https://fonts.googleapis.com/css?family=Poppins:200,200i,300,300i,400,400i,500,500i,600,600i,700&display=swap"
 		rel="stylesheet">
 
-	<!-- Preload CSS then apply onload to avoid render-blocking while still loading stylesheet early -->
-	<link rel="preload" href="css/bootstrap.min.css" as="style" onload="this.rel='stylesheet'">
+	<!-- Critical CSS loaded blocking to prevent CLS/FOUC -->
+	<link rel="stylesheet" href="css/bootstrap.min.css">
+	<link rel="stylesheet" href="css/main.css">
+	<!-- Non-critical CSS loaded async -->
 	<link rel="preload" href="css/animations.css" as="style" onload="this.rel='stylesheet'">
 	<link rel="preload" href="css/font-awesome.css" as="style" onload="this.rel='stylesheet'">
-	<link rel="preload" href="css/main.css" as="style" onload="this.rel='stylesheet'">
 
-	<!-- Fallback for users with JavaScript disabled -->
+	<!-- Fallback for users with JavaScript disabled (only for async-loaded CSS) -->
 	<noscript>
-		<link rel="stylesheet" href="css/bootstrap.min.css">
 		<link rel="stylesheet" href="css/animations.css">
 		<link rel="stylesheet" href="css/font-awesome.css">
-		<link rel="stylesheet" href="css/main.css" class="hidden color-switcher-link">
 	</noscript>
 	<style>
 		/* Responsive map wrapper - keeps 4:3 aspect ratio and fills container width */
@@ -176,7 +176,7 @@
 						<div class="row align-items-center">
 							<div class="col-xl-2 col-lg-3 col-11">
 								<a href="./index.html" class="logo">
-									<img src="images/new/logo.webp" alt="North Shore Judo Logo">
+									<img src="images/new/logo.webp" alt="North Shore Judo Logo" width="200" height="143">
 								</a>
 							</div>
 
@@ -256,7 +256,8 @@
 
 							<li class="ds text-left">
 								<img src="images/new/sized_oldsite_location_picture.webp"
-									alt="North Shore Judo dojo interior, Takapuna Auckland"> <!-- slide 02 slide2 slide02 -->
+									alt="North Shore Judo dojo interior, Takapuna Auckland"
+									width="2493" height="1403" loading="lazy"> <!-- slide 02 slide2 slide02 -->
 								<div class="container">
 									<div class="row">
 										<div class="col-md-12">
@@ -284,9 +285,11 @@
 										</div> <!-- eof .col-* -->
 									</div><!-- eof .row -->
 								</div><!-- eof .container-fluid -->
+							</li>
 							<li class="ds text-left">
 								<img src="images/new/sized_parkingspace.webp"
-									alt="Free parking at North Shore Judo, 34 Barrys Point Road Takapuna">
+									alt="Free parking at North Shore Judo, 34 Barrys Point Road Takapuna"
+									width="2493" height="1403" loading="lazy">
 								<!-- slide 03 slide3 slide03 -->
 								<div class="container">
 									<div class="row">
@@ -331,7 +334,7 @@
 						<div class="col-12 col-md-4 text-center">
 							<div class="icon-box icon-absolute text-center">
 								<div class="icon-styled">
-									<i class="fa fa-phone"></i>
+									<i class="fa fa-envelope"></i>
 								</div>
 								<span>EMAIL US</span>
 								<a href="mailto:northshorejudo@gmail.com">
@@ -359,7 +362,7 @@
 								</div>
 								<span>CALL US</span>
 								<a href="tel:+64278910027">
-									<h5>+64278910027</h5>
+									<h5>+64 27 891 0027</h5>
 								</a>
 							</div>
 						</div>
@@ -426,7 +429,7 @@
 									<span>HEAD COACH</span>
 								</div>
 								<div class="signature__right">
-									<img src="images/sign2w.png" alt="Coach Simon Greenhill signature">
+									<img src="images/sign2w.png" alt="Coach Simon Greenhill signature" width="140" height="44" loading="lazy">
 								</div>
 							</div>
 						</div>
@@ -461,7 +464,7 @@
 								<div class="vertical-item text-center">
 									<div class="item-media">
 										<img width="370" height="230" src="images/new/peewees_class.webp"
-											alt="Pee Wees judo class for kids aged 4-6 at North Shore Judo Auckland">
+											alt="Pee Wees judo class for kids aged 4-6 at North Shore Judo Auckland" loading="lazy">
 										<div class="media-links">
 											<!-- <a class="abs-link" title="" href="service-single.html"></a> -->
 										</div>
@@ -486,7 +489,7 @@
 								<div class="vertical-item text-center">
 									<div class="item-media">
 										<img width="370" height="230" src="images/new/juniors_class.webp"
-											alt="Junior judo classes for kids aged 7-14 on the North Shore Auckland">
+											alt="Junior judo classes for kids aged 7-14 on the North Shore Auckland" loading="lazy">
 										<div class="media-links">
 											<!-- <a class="abs-link" title="" href="service-single.html"></a> -->
 										</div>
@@ -511,8 +514,8 @@
 								<!-- SENIORS -->
 								<div class="vertical-item text-center">
 									<div class="item-media">
-										<img width="370" height="230" src="images/gallery/14.jpg"
-											alt="Senior judo training for adults and teens at North Shore Judo Auckland">
+										<img width="370" height="230" src="images/gallery/14.webp"
+											alt="Senior judo training for adults and teens at North Shore Judo Auckland" loading="lazy">
 										<div class="media-links">
 											<!-- <a class="abs-link" title="" href="service-single.html"></a> -->
 										</div>
@@ -578,7 +581,7 @@
 						<div class="vertical-item box-shadow content-padding text-center">
 							<div class="item-media">
 								<img src="images/team/group_photo_coaches.jpg"
-									alt="North Shore Judo coaches Simon, Amber and Doug">
+									alt="North Shore Judo coaches Simon, Amber and Doug" width="370" height="230" loading="lazy">
 							</div>
 							<div class="item-content">
 								<h5>
@@ -829,7 +832,7 @@
 					<div class="col-12 col-md-4 text-center">
 						<div class="icon-box icon-absolute text-center">
 							<div class="icon-styled">
-								<i class="fa fa-phone"></i>
+								<i class="fa fa-envelope"></i>
 							</div>
 							<span>EMAIL US</span>
 							<a href="mailto:northshorejudo@gmail.com">
@@ -857,7 +860,7 @@
 							</div>
 							<span>CALL US</span>
 							<a href="tel:+64278910027">
-								<h5>+64278910027</h5>
+								<h5>+64 27 891 0027</h5>
 							</a>
 						</div>
 					</div>
@@ -902,23 +905,23 @@
 
 							<ul>
 								<li>
-									<a href="https://www.ijf.org/?ref=northshorejudo"
-										aria-label="International Judo Federation website">
+									<a href="https://www.ijf.org/?utm_source=northshorejudo" rel="noopener"
+										aria-label="International Judo Federation website" target="_blank">
 										<img src="/images/new/IJF-logo.webp" alt="IJF logo" width="64" height="64">
 										<br><br>International Judo Federation
 									</a>
 								</li>
 								<li>
-									<a href="https://www.judonz.org/?ref=northshorejudo"
-										aria-label="New Zealand Judo Federation website">
+									<a href="https://www.judonz.org/?utm_source=northshorejudo" rel="noopener"
+										aria-label="New Zealand Judo Federation website" target="_blank">
 										<img src="/images/new/nzjffernw-logo.webp" alt="NZJF logo" width="64"
 											height="64">
 										<br><br>New Zealand Judo Federation
 									</a>
 								</li>
 								<li>
-									<a href="https://www.judoauckland.co.nz/?ref=northshorejudo"
-										aria-label="Auckland Judo Association website">
+									<a href="https://www.judoauckland.co.nz/?utm_source=northshorejudo" rel="noopener"
+										aria-label="Auckland Judo Association website" target="_blank">
 										<img src="/images/new/akljudo-logo.webp" alt="AKL Judo logo" width="64"
 											height="64">
 										<br><br>Auckland Judo Association
@@ -932,7 +935,7 @@
 					<div class="col-md-6 col-lg-4 text-center animate" data-animation="fadeInUp">
 						<div class="widget widget_icons_list">
 							<a href="./" class="logo flex-column text-center" aria-label="North Shore Judo home">
-								<img src="images/new/logo.webp" alt="logo">
+								<img src="images/new/logo.webp" alt="North Shore Judo logo" width="200" height="143" loading="lazy">
 							</a>
 							<p>The North Shore Judo Academy was founded in 1969 by Sensei Ron Jones (5th dan) and has
 								shared a love of Judo with thousands of players in that time, including the current
@@ -998,7 +1001,7 @@
 				<div class="row align-items-center">
 					<div class="divider-20 d-none d-lg-block"></div>
 					<div class="col-md-12 text-center">
-						<p>&copy; Copyright <span class="copyright_year">2021-present</span> All Rights Reserved</p>
+						<p>&copy; Copyright 2021-<script>document.write(new Date().getFullYear())</script> North Shore Judo. All Rights Reserved.</p>
 					</div>
 					<div class="divider-20 d-none d-lg-block"></div>
 				</div>
@@ -1268,12 +1271,34 @@
 		]
 	}
 	</script>
+	<script type="application/ld+json">
+	{
+		"@context": "https://schema.org",
+		"@type": "WebSite",
+		"name": "North Shore Judo",
+		"url": "https://northshorejudo.co.nz/",
+		"description": "Auckland's friendliest judo club in Takapuna. Judo classes for kids, teens, and adults.",
+		"publisher": {
+			"@id": "https://northshorejudo.co.nz/#organization"
+		}
+	}
+	</script>
+	<script type="application/ld+json">
+	{
+		"@context": "https://schema.org",
+		"@type": "BreadcrumbList",
+		"itemListElement": [
+			{
+				"@type": "ListItem",
+				"position": 1,
+				"name": "Home",
+				"item": "https://northshorejudo.co.nz/"
+			}
+		]
+	}
+	</script>
 
 	<script src="js/compressed.js" defer></script>
 	<script src="js/main.js" defer></script>
-
-
-
 </body>
-
 </html>
