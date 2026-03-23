@@ -1,0 +1,103 @@
+Clicks Impressions Position
+judo	2	347	9.6
+judo auckland	6	344	9.5
+judo near me	7	85	8.8
+judo nz	0	69	9.6
+judo north shore	23	61	4.0
+auckland judo	1	49	8.4
+judo studio	0	30	3.7
+judo for kids	1	16	7.3
+judo club	0	16	12.7
+judi	0	16	9.1
+judo classes near me	0	15	12.7
+judo gym	1	14	8.0
+judo classes	0	10	15.4
+judo kids	0	10	7.0
+voc north shore jsm	0	9	19.0
+nz judo	0	7	21.9
+judo class	0	7	15.1
+judo christchurch	0	6	56.3
+kids judo classes near me	0	6	7.0
+judo club near me	0	6	2.3
+karate north shore	0	5	55.4
+judo new zealand	0	5	34.4
+judo gyms near me	0	5	9.2
+taekwondo north shore	0	4	59.0
+new zealand judo	0	4	41.8
+judo classes for kids near me	0	4	9.5
+judos	0	4	8.0
+judo clubs near me	0	4	7.8
+kids judo	0	4	6.5
+north shore dog training club	0	3	79.3
+christchurch judo school	0	3	65.0
+learn judo near me	0	3	10.7
+judp	0	3	6.7
+judo academy	0	3	5.7
+bjj north shore	0	2	78.5
+unsw judo club	0	2	68.0
+judo class near me	0	2	48.0
+metro judo club	0	2	43.0
+nippon judo	0	2	37.0
+judo new zealand, sports club	0	2	19.0
+judo near me for kids	0	2	11.5
+judo classes for kids	0	2	11.0
+judo training latest	0	2	9.0
+judo newr me	0	2	6.5
+judo coach	0	2	5.0
+judo lessons near me	0	2	5.0
+judo teacher	0	2	5.0
+kids judo classes	0	2	5.0
+judo school	0	2	4.0
+judo gym near me	1	1	6.0
+yes	1	1	5.0
+taekwondo clubs	0	1	117.0
+north shore club	0	1	112.0
+jiu jitsu north shore	0	1	99.0
+judo school north richland hills	0	1	99.0
+north shore takapuna	0	1	99.0
+north shore dog training	0	1	97.0
+north richland hills judo school	0	1	84.0
+judo hamilton	0	1	71.0
+big judo	0	1	69.0
+34 barrys point road	0	1	67.0
+three kings judo club	0	1	66.0
+henkada judo club	0	1	64.0
+hamilton judo club	0	1	60.0
+north shore chess club	0	1	58.0
+auckland uni judo	0	1	39.0
+auckland university judo club	0	1	38.0
+three kings judo	0	1	33.0
+gisborne judo club	0	1	28.0
+howick and st heliers academy of judo, martial arts school, auckland	0	1	19.0
+judo weight classes	0	1	14.0
+judo for kids near me	0	1	13.0
+judo kids near me	0	1	12.0
+judokai	0	1	11.0
+judo clubs	0	1	10.0
+judo player	0	1	10.0
+judo schools	0	1	10.0
+beginner judo classes near me	0	1	9.0
+jodo near me	0	1	9.0
+judo nearby	0	1	9.0
+judo therapy	0	1	9.0
+in auckland	0	1	8.0
+train judo	0	1	8.0
+judo lessons	0	1	7.0
+judo near	0	1	7.0
+judo near me for adults	0	1	7.0
+judo near me for adults for beginners	0	1	7.0
+judo training	0	1	7.0
+sensei judo	0	1	7.0
+judo classes near me for kids	0	1	6.0
+local judo clubs	0	1	6.0
+judo newmarket	0	1	5.0
+judo registration	0	1	5.0
+judoka training	0	1	5.0
+live judo	0	1	5.0
+judo classes kids adults	0	1	4.0
+judo competition near me	0	1	4.0
+judo live	0	1	4.0
+judo n	0	1	4.0
+judo the sport	0	1	4.0
+----
+check our website https://northshorejudo.co.nz/github to suggest changes
