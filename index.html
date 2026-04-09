@@ -129,6 +129,14 @@
 				height: 350px;
 			}
 		}
+
+		/* Mobile header fix — prevent logo overflow and header overlap */
+		@media (max-width: 767px) {
+			.page_header .logo img {
+				max-width: 120px;
+				height: auto;
+			}
+		}
 	</style>
 	<script src="js/vendor/modernizr-custom.js"></script>
 
@@ -270,6 +278,7 @@
 														<p class="intro_before_featured_word">
 															Join North Shore Judo and learn <br />
 															the art of Judo; "the gentle way".
+														</p>
 													</div>
 													<div class="intro_layer button" data-animation="fadeInLeft">
 														<a href="https://northshorejudo.co.nz/join?utm_source=website_home" class="btn btn-maincolor intro_button" data-signup-trigger data-signup-source="website_home">
@@ -631,7 +640,7 @@
 							<div class="review-carousel-header">
 								<div class="review-carousel-title">
 									<h3>Google Reviews for North Shore Judo</h3>
-\								</div>
+								</div>
 								<a class="review-rating-chip" data-review-google-link href="https://www.google.com/maps/place/?q=place_id:ChIJTbclAm05DW0ROljb3bNvNw8" target="_blank" rel="noopener noreferrer">
 									<span data-review-rating>5 / 5</span>
 									<span class="review-chip-stars" aria-hidden="true">★★★★★</span>
@@ -715,9 +724,9 @@
 										aria-labelledby="collapse01_tab" data-parent="#accordion01">
 										<div class="card-body">
 
-											<p>Not at all. You’ll find that our classes for beginners are the perfect
-												way to build up your overall fitness level regardless of your physical
-												condition. Good luck!</p>
+											<p>Not at all. Our beginner classes are designed to build your fitness
+												gradually, no matter where you’re starting from. You’ll improve as
+												you train.</p>
 
 										</div>
 									</div>
@@ -737,10 +746,9 @@
 									<div id="collapse02" class="collapse" role="tabpanel"
 										aria-labelledby="collapse02_tab" data-parent="#accordion01">
 										<div class="card-body">
-											Of course! We encourage anyone interested in judo, whether potential members
-											or curious observers, to come and watch a class. This gives you a firsthand
-											look at our training environment and teaching methods. Feel free to visit,
-											ask questions, and experience the dynamic atmosphere at North Shore Judo.
+											Absolutely — you're encouraged and welcome to come along and watch or join any class.
+											It's a great way to see how we train and whether judo is right for you or your
+											child. No need to book — just sign up (online or with Simon at the club) and turn up on a training night.
 										</div>
 									</div>
 								</div>
@@ -781,9 +789,10 @@
 									<div id="collapse04" class="collapse" role="tabpanel"
 										aria-labelledby="collapse04_tab" data-parent="#accordion01">
 										<div class="card-body">
-											Our skilled coaches prioritize safety through guided training and proper
-											technique, ensuring you can enjoy judo with minimized risks. Your safety is
-											our topmost priority at North Shore Judo.
+											Judo is a contact sport, so minor bumps and bruises can happen
+											— but serious injuries are extremely rare. We teach proper breakfalls from day
+											one, and our coaches always match you with adequate training partners at a 
+											so you can learn safely. Your safety is our priority.
 										</div>
 									</div>
 								</div>
