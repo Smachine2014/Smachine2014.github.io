@@ -223,7 +223,7 @@
     bodyLineTwo.textContent = "Prefer to sign up in person? You can register at the dojo with Simon before class starts.";
 
     note.className = "signup-modal-note";
-    note.textContent = "All signup links include source tracking so we can measure which page helped you join.";
+    note.textContent = "";
 
     actions.className = "signup-modal-actions";
 
@@ -238,7 +238,7 @@
     inPersonButton.textContent = "Sign Up In Person With Simon";
 
     actions.appendChild(onlineButton);
-    actions.appendChild(inPersonButton);
+    // actions.appendChild(inPersonButton);
 
     modal.appendChild(closeButton);
     modal.appendChild(title);
