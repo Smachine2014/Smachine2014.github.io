@@ -7,9 +7,72 @@
 
 <url>
   <loc>https://northshorejudo.co.nz/</loc>
-  <lastmod>2026-03-23T00:00:00+13:00</lastmod>
+  <lastmod>2026-04-09T00:00:00+12:00</lastmod>
   <changefreq>weekly</changefreq>
   <priority>1.00</priority>
+</url>
+
+<url>
+  <loc>https://northshorejudo.co.nz/about/</loc>
+  <lastmod>2026-04-09T00:00:00+12:00</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.80</priority>
+</url>
+
+<url>
+  <loc>https://northshorejudo.co.nz/classes/</loc>
+  <lastmod>2026-04-09T00:00:00+12:00</lastmod>
+  <changefreq>weekly</changefreq>
+  <priority>0.90</priority>
+</url>
+
+<url>
+  <loc>https://northshorejudo.co.nz/classes/kids/</loc>
+  <lastmod>2026-04-09T00:00:00+12:00</lastmod>
+  <changefreq>weekly</changefreq>
+  <priority>0.85</priority>
+</url>
+
+<url>
+  <loc>https://northshorejudo.co.nz/classes/juniors/</loc>
+  <lastmod>2026-04-09T00:00:00+12:00</lastmod>
+  <changefreq>weekly</changefreq>
+  <priority>0.85</priority>
+</url>
+
+<url>
+  <loc>https://northshorejudo.co.nz/classes/adults/</loc>
+  <lastmod>2026-04-09T00:00:00+12:00</lastmod>
+  <changefreq>weekly</changefreq>
+  <priority>0.85</priority>
+</url>
+
+<url>
+  <loc>https://northshorejudo.co.nz/coaches/</loc>
+  <lastmod>2026-04-09T00:00:00+12:00</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.75</priority>
+</url>
+
+<url>
+  <loc>https://northshorejudo.co.nz/pricing/</loc>
+  <lastmod>2026-04-09T00:00:00+12:00</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.80</priority>
+</url>
+
+<url>
+  <loc>https://northshorejudo.co.nz/faq/</loc>
+  <lastmod>2026-04-09T00:00:00+12:00</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.75</priority>
+</url>
+
+<url>
+  <loc>https://northshorejudo.co.nz/contact/</loc>
+  <lastmod>2026-04-09T00:00:00+12:00</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.80</priority>
 </url>
 
 </urlset>
