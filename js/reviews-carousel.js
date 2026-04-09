@@ -35,7 +35,7 @@
 
   function toTimestamp(value) {
     var numeric = Number(value || 0);
-    return isFinite(numeric) ? numeric : 0;
+    return Number.isFinite(numeric) ? numeric : 0;
   }
 
   function normalizeReview(rawReview) {
@@ -46,7 +46,7 @@
     var text = sanitizeWhitespace(rawReview.review_text);
     var rating = Number(rawReview.review_rating || rawReview.rating || 0);
 
-    if (!text || text.length < 35 || !isFinite(rating) || rating < 4) {
+    if (!text || text.length < 35 || !Number.isFinite(rating) || rating < 4) {
       return null;
     }
 
@@ -318,7 +318,7 @@
       return;
     }
 
-    Array.prototype.forEach.call(carousels, initCarousel);
+    carousels.forEach(initCarousel);
   }
 
   if (document.readyState === "loading") {
