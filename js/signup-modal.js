@@ -18,6 +18,16 @@
       .slice(0, 48);
   }
 
+  function buildTrackingToken(parts) {
+    return parts
+      .map(function (part) {
+        return slugify(part);
+      })
+      .filter(Boolean)
+      .join("_")
+      .slice(0, 96);
+  }
+
   function getSourceFromPathname(pathname) {
     if (/^\/classes\/kids\/?$/i.test(pathname)) {
       return "website_kids";
@@ -72,39 +82,108 @@
     }
   }
 
-  function buildJoinUrl(source, medium, content) {
+  function getSignupLocation(element) {
+    var ancestor;
+
+    if (!element) {
+      return "cta";
+    }
+
+    if (element.getAttribute("data-signup-location")) {
+      return slugify(element.getAttribute("data-signup-location"));
+    }
+
+    ancestor = element.closest("header, .page_header, .top-includes");
+
+    if (ancestor) {
+      return "header";
+    }
+
+    ancestor = element.closest(".page_slider, .intro_layers, .intro_layers_wrapper, .intro_layer");
+
+    if (ancestor) {
+      return "hero";
+    }
+
+    ancestor = element.closest(".inline-links");
+
+    if (ancestor) {
+      return "cta";
+    }
+
+    ancestor = element.closest("footer, .page_footer");
+
+    if (ancestor) {
+      return "footer";
+    }
+
+    ancestor = element.closest(".content-section, .page-hero, .review-carousel, .class-switcher");
+
+    if (ancestor) {
+      return "body";
+    }
+
+    return "cta";
+  }
+
+  function getSignupText(element) {
+    if (!element) {
+      return "signup";
+    }
+
+    return slugify(element.getAttribute("data-signup-text") || element.textContent || "signup");
+  }
+
+  function getTrackingDetails(trigger) {
+    var href = trigger.tagName === "A" ? sanitizeWhitespace(trigger.getAttribute("href")) : "";
+    var source =
+      sanitizeWhitespace(trigger.getAttribute("data-signup-source")) ||
+      parseUtmSourceFromHref(href) ||
+      getSourceFromPathname(window.location.pathname);
+    var location = getSignupLocation(trigger);
+    var text = getSignupText(trigger);
+
+    return {
+      source: source,
+      location: location,
+      text: text,
+      page: window.location.pathname.replace(/\/$/, "") || "/",
+      context: buildTrackingToken([location, text]),
+      directContext: buildTrackingToken([location, text, "direct"]),
+      modalOnlineContext: buildTrackingToken([location, text, "modal", "online"]),
+      modalInPersonContext: buildTrackingToken([location, text, "modal", "in_person"])
+    };
+  }
+
+  function buildJoinUrl(tracking, variant) {
     var url = new URL(JOIN_URL);
-    url.searchParams.set("utm_source", source);
+    url.searchParams.set("utm_source", tracking.source);
+    url.searchParams.set("utm_medium", tracking.location || "cta");
+    url.searchParams.set("utm_campaign", MODAL_CAMPAIGN);
+    url.searchParams.set("utm_content", tracking.context || tracking.text || "signup");
+    url.searchParams.set("cta_page", tracking.page || "/");
+    url.searchParams.set("cta_location", tracking.location || "cta");
+    url.searchParams.set("cta_text", tracking.text || "signup");
 
-    if (medium) {
-      url.searchParams.set("utm_medium", medium);
-    }
-
-    if (MODAL_CAMPAIGN) {
-      url.searchParams.set("utm_campaign", MODAL_CAMPAIGN);
-    }
-
-    if (content) {
-      url.searchParams.set("utm_content", content);
+    if (variant) {
+      url.searchParams.set("cta_variant", variant);
     }
 
     return url.toString();
   }
 
-  function buildContactUrl(source, medium, content) {
+  function buildContactUrl(tracking, variant) {
     var url = new URL(CONTACT_URL);
-    url.searchParams.set("utm_source", source);
+    url.searchParams.set("utm_source", tracking.source);
+    url.searchParams.set("utm_medium", tracking.location || "cta");
+    url.searchParams.set("utm_campaign", MODAL_CAMPAIGN);
+    url.searchParams.set("utm_content", tracking.context || tracking.text || "signup");
+    url.searchParams.set("cta_page", tracking.page || "/");
+    url.searchParams.set("cta_location", tracking.location || "cta");
+    url.searchParams.set("cta_text", tracking.text || "signup");
 
-    if (medium) {
-      url.searchParams.set("utm_medium", medium);
-    }
-
-    if (MODAL_CAMPAIGN) {
-      url.searchParams.set("utm_campaign", MODAL_CAMPAIGN);
-    }
-
-    if (content) {
-      url.searchParams.set("utm_content", content);
+    if (variant) {
+      url.searchParams.set("cta_variant", variant);
     }
 
     return url.toString();
@@ -205,7 +284,6 @@
     var inPersonButton = backdrop.querySelector("[data-signup-inperson]");
     var triggerSelector = "a.btn, button.btn, a.intro_button, button.intro_button, [data-signup-trigger]";
     var triggers = document.querySelectorAll(triggerSelector);
-    var defaultSource = getSourceFromPathname(window.location.pathname);
 
     function closeModal() {
       backdrop.classList.remove("is-open");
@@ -213,12 +291,9 @@
       document.body.classList.remove("signup-modal-open");
     }
 
-    function openModal(source, context) {
-      var trackingSource = sanitizeWhitespace(source) || defaultSource;
-      var trackingContext = sanitizeWhitespace(context) || "signup_modal";
-
-      onlineButton.href = buildJoinUrl(trackingSource, "modal", trackingContext + "_online");
-      inPersonButton.href = buildContactUrl(trackingSource, "modal", trackingContext + "_in_person");
+    function openModal(tracking) {
+      onlineButton.href = buildJoinUrl(tracking, "modal_online");
+      inPersonButton.href = buildContactUrl(tracking, "modal_in_person");
 
       backdrop.removeAttribute("hidden");
       backdrop.classList.add("is-open");
@@ -241,8 +316,7 @@
     });
 
     triggers.forEach(function (trigger) {
-      var source;
-      var context;
+      var tracking;
       var href;
       var hasJoinHref;
 
@@ -250,25 +324,24 @@
         return;
       }
 
-      context = slugify(trigger.getAttribute("data-signup-context") || trigger.textContent || "signup");
+      tracking = getTrackingDetails(trigger);
       href = trigger.tagName === "A" ? sanitizeWhitespace(trigger.getAttribute("href")) : "";
-      source =
-        sanitizeWhitespace(trigger.getAttribute("data-signup-source")) ||
-        parseUtmSourceFromHref(href) ||
-        defaultSource;
 
       hasJoinHref = /northshorejudo\.co\.nz\/join/i.test(href);
 
-      if (trigger.tagName === "A" && (!hasJoinHref || !parseUtmSourceFromHref(href))) {
-        trigger.href = buildJoinUrl(source);
+      if (trigger.tagName === "A") {
+        trigger.href = hasJoinHref ? buildJoinUrl(tracking, "direct") : trigger.href;
       }
 
-      trigger.setAttribute("data-signup-source", source);
+      trigger.setAttribute("data-signup-source", tracking.source);
+      trigger.setAttribute("data-signup-location", tracking.location);
+      trigger.setAttribute("data-signup-text", tracking.text);
+      trigger.setAttribute("data-signup-context", tracking.context);
       trigger.setAttribute("data-signup-trigger", "");
 
       trigger.addEventListener("click", function (event) {
         event.preventDefault();
-        openModal(source, context);
+        openModal(tracking);
       });
     });
   }
