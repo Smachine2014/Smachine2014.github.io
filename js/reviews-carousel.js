@@ -2,18 +2,28 @@
   "use strict";
 
   var DEFAULT_FEED_URL = "/seo/reviews/reviews.json";
-  var MAX_REVIEWS = 8;
-  var AUTO_ADVANCE_MS = 9000;
+  var DEFAULT_REVIEW_LINK = "https://www.google.com/maps/place/?q=place_id:ChIJTbclAm05DW0ROljb3bNvNw8";
+  var MAX_REVIEWS = 9;
+  var AUTO_ADVANCE_MS = 7500;
+  var MAX_TEXT_LENGTH = 520;
   var KEYWORD_PATTERNS = [
-    /kids?|children|child|family|son|daughter|pee\s?wees?|junior/i,
-    /adult|beginner|fitness|confidence|safe|safety|structured/i,
+    /kids?|children|family|parent|junior|pee\s?wees?/i,
+    /adult|beginner|confidence|fitness|safe|structured/i,
     /coach|coaches|sensei|simon|doug/i,
-    /community|friendly|welcoming|support|respect/i,
-    /recommend|progress|discipline|resilience/i
+    /friendly|welcoming|community|support/i,
+    /recommend|progress|respect|discipline/i
   ];
 
   function sanitizeWhitespace(text) {
     return String(text || "").replace(/\s+/g, " ").trim();
+  }
+
+  function clampText(text) {
+    if (text.length <= MAX_TEXT_LENGTH) {
+      return text;
+    }
+
+    return text.slice(0, MAX_TEXT_LENGTH - 1).trim() + "...";
   }
 
   function isMostlyEnglish(text) {
@@ -24,13 +34,19 @@
     }
 
     var asciiChars = sample.match(/[\x00-\x7F]/g) || [];
-    return asciiChars.length / sample.length >= 0.9;
+    return asciiChars.length / sample.length >= 0.88;
   }
 
   function keywordScore(text) {
-    return KEYWORD_PATTERNS.reduce(function (total, pattern) {
-      return total + (pattern.test(text) ? 2 : 0);
-    }, 0);
+    var score = 0;
+
+    KEYWORD_PATTERNS.forEach(function (pattern) {
+      if (pattern.test(text)) {
+        score += 2;
+      }
+    });
+
+    return score;
   }
 
   function toTimestamp(value) {
@@ -38,13 +54,43 @@
     return Number.isFinite(numeric) ? numeric : 0;
   }
 
+  function formatDate(timestamp) {
+    if (!timestamp) {
+      return "";
+    }
+
+    try {
+      return new Date(timestamp * 1000).toLocaleDateString("en-NZ", {
+        month: "short",
+        year: "numeric"
+      });
+    } catch (error) {
+      return "";
+    }
+  }
+
+  function getInitials(author) {
+    var words = sanitizeWhitespace(author).split(" ").filter(Boolean);
+
+    if (!words.length) {
+      return "G";
+    }
+
+    if (words.length === 1) {
+      return words[0].charAt(0).toUpperCase();
+    }
+
+    return (words[0].charAt(0) + words[1].charAt(0)).toUpperCase();
+  }
+
   function normalizeReview(rawReview) {
     if (!rawReview || typeof rawReview !== "object") {
       return null;
     }
 
-    var text = sanitizeWhitespace(rawReview.review_text);
+    var text = clampText(sanitizeWhitespace(rawReview.review_text));
     var rating = Number(rawReview.review_rating || rawReview.rating || 0);
+    var author = sanitizeWhitespace(rawReview.author_title) || "Google Reviewer";
 
     if (!text || text.length < 35 || !Number.isFinite(rating) || rating < 4) {
       return null;
@@ -55,18 +101,21 @@
     }
 
     return {
-      author: sanitizeWhitespace(rawReview.author_title) || "Google Reviewer",
+      author: author,
+      initials: getInitials(author),
+      authorImage: sanitizeWhitespace(rawReview.author_image),
       rating: Math.max(1, Math.min(5, Math.round(rating))),
       text: text,
       timestamp: toTimestamp(rawReview.review_timestamp),
+      dateLabel: formatDate(toTimestamp(rawReview.review_timestamp)),
       reviewUrl:
         sanitizeWhitespace(rawReview.review_link) ||
         sanitizeWhitespace(rawReview.reviews_link) ||
         sanitizeWhitespace(rawReview.location_link) ||
-        "https://www.google.com/maps/place/?q=place_id:ChIJTbclAm05DW0ROljb3bNvNw8",
+        DEFAULT_REVIEW_LINK,
       qualityScore:
         keywordScore(text) +
-        (text.length > 220 ? 2 : text.length > 120 ? 1 : 0) +
+        (text.length > 280 ? 2 : text.length > 150 ? 1 : 0) +
         (rating >= 5 ? 2 : 1)
     };
   }
@@ -88,7 +137,7 @@
         return b.text.length - a.text.length;
       })
       .forEach(function (review) {
-        var key = review.author.toLowerCase() + "::" + review.text.slice(0, 80).toLowerCase();
+        var key = review.author.toLowerCase() + "::" + review.text.slice(0, 90).toLowerCase();
 
         if (!seen[key] && deduped.length < MAX_REVIEWS) {
           seen[key] = true;
@@ -113,44 +162,93 @@
     return element;
   }
 
-  function formatStars(rating) {
-    return "*".repeat(rating) + " " + rating + "/5";
+  function getStarString(rating) {
+    var value = "";
+    var i;
+
+    for (i = 0; i < 5; i += 1) {
+      value += i < rating ? "★" : "☆";
+    }
+
+    return value;
   }
 
   function buildReviewCard(review) {
-    var article = createElement("article", "review-card-live");
-    var quote = createElement("p", "review-text", '"' + review.text + '"');
+    var article = createElement("article", "review-card-live is-entering");
+    var head = createElement("div", "review-card-head");
+    var avatar = createElement("div", "review-avatar");
+    var profile = createElement("div", "review-profile");
+    var author = createElement("h4", "review-author", review.author);
     var meta = createElement("div", "review-meta");
-    var stars = createElement("span", "review-stars", formatStars(review.rating));
-    var author = createElement("span", "review-author", review.author);
-    var link = createElement("a", "review-source-link", "Read this review on Google Maps");
+    var stars = createElement("span", "review-stars", getStarString(review.rating));
+    var date = createElement("span", "review-date", review.dateLabel || "Recent review");
+    var quote = createElement("p", "review-text", '"' + review.text + '"');
+    var link = createElement("a", "review-source-link", "Read this review on Google");
+
+    if (review.authorImage) {
+      var image = createElement("img", "review-avatar-image");
+      image.src = review.authorImage;
+      image.alt = review.author + " avatar";
+      image.loading = "lazy";
+      avatar.appendChild(image);
+    } else {
+      avatar.appendChild(createElement("span", "review-avatar-fallback", review.initials));
+    }
 
     link.href = review.reviewUrl;
     link.target = "_blank";
     link.rel = "noopener noreferrer";
 
     meta.appendChild(stars);
-    meta.appendChild(author);
+    meta.appendChild(date);
+    profile.appendChild(author);
+    profile.appendChild(meta);
+    head.appendChild(avatar);
+    head.appendChild(profile);
+
+    article.appendChild(head);
     article.appendChild(quote);
-    article.appendChild(meta);
     article.appendChild(link);
 
     return article;
   }
 
-  function setTextIfPresent(root, selector, value) {
+  function updateReviewLink(root, selector, href) {
     var element = root.querySelector(selector);
 
-    if (element && value) {
-      element.textContent = value;
+    if (!element || !href) {
+      return;
     }
+
+    element.href = href;
   }
 
-  function setHrefIfPresent(root, selector, href) {
+  function updateReviewText(root, selector, value) {
     var element = root.querySelector(selector);
 
-    if (element && href) {
-      element.href = href;
+    if (!element || !value) {
+      return;
+    }
+
+    element.textContent = value;
+  }
+
+  function setUnavailableStatus(root, meta) {
+    var status = root.querySelector("[data-review-status]");
+
+    if (!status) {
+      return;
+    }
+
+    status.textContent = "Google reviews are temporarily unavailable.";
+
+    if (meta && meta.reviewsUrl) {
+      var link = createElement("a", "review-source-link", "View all reviews on Google");
+      link.href = meta.reviewsUrl;
+      link.target = "_blank";
+      link.rel = "noopener noreferrer";
+      status.appendChild(document.createTextNode(" "));
+      status.appendChild(link);
     }
   }
 
@@ -158,44 +256,26 @@
     var reviews = payload.items;
     var meta = payload.meta;
     var stage = root.querySelector("[data-review-list]");
+    var dotsWrap = root.querySelector("[data-review-dots]");
     var prevButton = root.querySelector("[data-review-prev]");
     var nextButton = root.querySelector("[data-review-next]");
-    var indexLabel = root.querySelector("[data-review-index]");
-    var totalLabel = root.querySelector("[data-review-total]");
     var statusLabel = root.querySelector("[data-review-status]");
-    var fallback = root.querySelector("[data-review-fallback]");
     var currentIndex = 0;
     var timer = null;
 
     if (!stage || !reviews.length) {
+      setUnavailableStatus(root, meta);
       return false;
     }
 
-    if (fallback) {
-      fallback.hidden = true;
-    }
+    updateReviewLink(root, "[data-review-google-link]", meta.reviewsUrl);
 
     if (meta.totalReviews > 0) {
-      setTextIfPresent(root, "[data-review-count]", String(meta.totalReviews) + " Google reviews");
+      updateReviewText(root, "[data-review-count]", String(meta.totalReviews) + " reviews");
     }
 
     if (meta.averageRating > 0) {
-      setTextIfPresent(root, "[data-review-rating]", meta.averageRating.toFixed(1) + " / 5");
-    }
-
-    setHrefIfPresent(root, "[data-review-google-link]", meta.reviewsUrl);
-
-    function render() {
-      stage.innerHTML = "";
-      stage.appendChild(buildReviewCard(reviews[currentIndex]));
-
-      if (indexLabel) {
-        indexLabel.textContent = String(currentIndex + 1);
-      }
-
-      if (totalLabel) {
-        totalLabel.textContent = String(reviews.length);
-      }
+      updateReviewText(root, "[data-review-rating]", meta.averageRating.toFixed(1) + " / 5");
     }
 
     function clearCycle() {
@@ -205,34 +285,83 @@
       }
     }
 
-    function next() {
-      currentIndex = (currentIndex + 1) % reviews.length;
-      render();
-    }
-
-    function previous() {
-      currentIndex = currentIndex === 0 ? reviews.length - 1 : currentIndex - 1;
-      render();
-    }
-
     function startCycle() {
       clearCycle();
 
       if (reviews.length > 1) {
-        timer = window.setInterval(next, AUTO_ADVANCE_MS);
+        timer = window.setInterval(function () {
+          goTo((currentIndex + 1) % reviews.length, true);
+        }, AUTO_ADVANCE_MS);
       }
+    }
+
+    function updateDots() {
+      var buttons;
+
+      if (!dotsWrap) {
+        return;
+      }
+
+      buttons = dotsWrap.querySelectorAll("button");
+
+      buttons.forEach(function (button, index) {
+        var isActive = index === currentIndex;
+        button.classList.toggle("is-active", isActive);
+        button.setAttribute("aria-current", isActive ? "true" : "false");
+      });
+    }
+
+    function render(animateIn) {
+      var card = buildReviewCard(reviews[currentIndex]);
+
+      stage.innerHTML = "";
+      stage.appendChild(card);
+      updateDots();
+
+      if (animateIn) {
+        window.requestAnimationFrame(function () {
+          card.classList.remove("is-entering");
+        });
+      } else {
+        card.classList.remove("is-entering");
+      }
+    }
+
+    function goTo(nextIndex, animateIn) {
+      currentIndex = nextIndex;
+      render(animateIn);
+    }
+
+    function buildDots() {
+      if (!dotsWrap || reviews.length <= 1) {
+        return;
+      }
+
+      dotsWrap.innerHTML = "";
+
+      reviews.forEach(function (review, index) {
+        var dot = createElement("button", "review-dot");
+        dot.type = "button";
+        dot.setAttribute("aria-label", "Show review " + (index + 1) + " by " + review.author);
+        dot.addEventListener("click", function () {
+          goTo(index, true);
+          startCycle();
+        });
+        dotsWrap.appendChild(dot);
+      });
     }
 
     if (prevButton) {
       prevButton.addEventListener("click", function () {
-        previous();
+        var targetIndex = currentIndex === 0 ? reviews.length - 1 : currentIndex - 1;
+        goTo(targetIndex, true);
         startCycle();
       });
     }
 
     if (nextButton) {
       nextButton.addEventListener("click", function () {
-        next();
+        goTo((currentIndex + 1) % reviews.length, true);
         startCycle();
       });
     }
@@ -241,12 +370,28 @@
     root.addEventListener("mouseleave", startCycle);
     root.addEventListener("focusin", clearCycle);
     root.addEventListener("focusout", startCycle);
+    root.addEventListener("keydown", function (event) {
+      if (event.key === "ArrowLeft") {
+        event.preventDefault();
+        if (prevButton) {
+          prevButton.click();
+        }
+      }
 
-    render();
+      if (event.key === "ArrowRight") {
+        event.preventDefault();
+        if (nextButton) {
+          nextButton.click();
+        }
+      }
+    });
+
+    buildDots();
+    render(false);
     startCycle();
 
     if (statusLabel) {
-      statusLabel.textContent = "Showing curated Google reviews from the latest exported feed.";
+      statusLabel.textContent = "";
     }
 
     return true;
@@ -258,7 +403,6 @@
       : Array.isArray(rawData && rawData.reviews)
       ? rawData.reviews
       : [];
-
     var normalized = rawReviews.map(normalizeReview).filter(Boolean);
     var curated = pickReviews(normalized);
     var first = rawReviews[0] || {};
@@ -271,7 +415,7 @@
         reviewsUrl:
           sanitizeWhitespace(first.reviews_link) ||
           sanitizeWhitespace(first.location_link) ||
-          "https://www.google.com/maps/place/?q=place_id:ChIJTbclAm05DW0ROljb3bNvNw8"
+          DEFAULT_REVIEW_LINK
       }
     };
   }
@@ -281,7 +425,7 @@
     var statusLabel = root.querySelector("[data-review-status]");
 
     if (statusLabel) {
-      statusLabel.textContent = "Loading Google reviews...";
+      statusLabel.textContent = "Loading latest Google reviews...";
     }
 
     fetch(feedUrl, {
@@ -299,15 +443,12 @@
       })
       .then(function (rawData) {
         var payload = readPayload(rawData);
-
-        if (!mountCarousel(root, payload) && statusLabel) {
-          statusLabel.textContent = "Google reviews are temporarily unavailable. Showing fallback testimonials.";
-        }
+        mountCarousel(root, payload);
       })
       .catch(function () {
-        if (statusLabel) {
-          statusLabel.textContent = "Google reviews are temporarily unavailable. Showing fallback testimonials.";
-        }
+        setUnavailableStatus(root, {
+          reviewsUrl: DEFAULT_REVIEW_LINK
+        });
       });
   }
 
