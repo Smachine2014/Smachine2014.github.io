@@ -409,11 +409,13 @@ body.signup-modal-open {
 	margin-top: 0;
 	margin-bottom: 10px;
 	font-size: 29px;
+	color: #fff;
 }
 
 .signup-modal p {
 	margin-bottom: 10px;
 	line-height: 1.62;
+	color: rgba(255, 255, 255, 0.88);
 }
 
 .signup-modal-note {
