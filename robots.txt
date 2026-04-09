@@ -1,6 +1,8 @@
 User-agent: *
 Allow: /
 
+Disallow: /cdn-cgi/
+
 # AI Search Crawlers - allow for AI search visibility
 User-agent: GPTBot
 Allow: /
@@ -22,12 +24,14 @@ Allow: /
 
 # Block AI training crawlers (not search)
 User-agent: CCBot
-Disallow: /
+Allow: /
 
 User-agent: anthropic-ai
-Disallow: /
+Allow: /
 
 User-agent: cohere-ai
-Disallow: /
+Allow: /
+
 
 Sitemap: https://northshorejudo.co.nz/sitemap.xml
+LLMs: https://northshorejudo.co.nz/llms.txt
