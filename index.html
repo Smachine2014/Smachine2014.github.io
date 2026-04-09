@@ -67,15 +67,15 @@
 	<!-- Critical CSS loaded blocking to prevent CLS/FOUC -->
 	<link rel="stylesheet" href="css/bootstrap.min.css">
 	<link rel="stylesheet" href="css/main.css">
-	<link rel="stylesheet" href="css/seo-pages.css">
+	<link rel="stylesheet" href="css/seo-pages.min.css">
 	<!-- Non-critical CSS loaded async -->
-	<link rel="preload" href="css/animations.css" as="style" onload="this.rel='stylesheet'">
-	<link rel="preload" href="css/font-awesome.css" as="style" onload="this.rel='stylesheet'">
+	<link rel="preload" href="css/animations.min.css" as="style" onload="this.rel='stylesheet'">
+	<link rel="preload" href="css/font-awesome.min.css" as="style" onload="this.rel='stylesheet'">
 
 	<!-- Fallback for users with JavaScript disabled (only for async-loaded CSS) -->
 	<noscript>
-		<link rel="stylesheet" href="css/animations.css">
-		<link rel="stylesheet" href="css/font-awesome.css">
+		<link rel="stylesheet" href="css/animations.min.css">
+		<link rel="stylesheet" href="css/font-awesome.min.css">
 	</noscript>
 	<style>
 		/* Responsive map wrapper - keeps 4:3 aspect ratio and fills container width */
@@ -1432,8 +1432,8 @@
 	</script>
 
 	<script src="js/compressed.js" defer></script>
-	<script src="js/reviews-carousel.js" defer></script>
-	<script src="/js/signup-modal.js" defer></script>
+	<script src="js/reviews-carousel.min.js" defer></script>
+	<script src="/js/signup-modal.min.js" defer></script>
 	<script src="js/main.js" defer></script>
 </body>
 </html>
