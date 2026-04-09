@@ -15,6 +15,7 @@
 	<meta name="description"
 		content="North Shore Judo — Auckland's friendliest judo club in Takapuna. Kids, teens &amp; adult judo classes. Beginners welcome. Competition-size dojo, free first class. Join the North Shore judo community today!">
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<meta name="robots" content="index,follow">
 
 	<!-- SEO -->
 	<link rel="canonical" href="https://northshorejudo.co.nz/" />
@@ -66,6 +67,7 @@
 	<!-- Critical CSS loaded blocking to prevent CLS/FOUC -->
 	<link rel="stylesheet" href="css/bootstrap.min.css">
 	<link rel="stylesheet" href="css/main.css">
+	<link rel="stylesheet" href="css/seo-pages.css">
 	<!-- Non-critical CSS loaded async -->
 	<link rel="preload" href="css/animations.css" as="style" onload="this.rel='stylesheet'">
 	<link rel="preload" href="css/font-awesome.css" as="style" onload="this.rel='stylesheet'">
@@ -175,7 +177,7 @@
 					<div class="container">
 						<div class="row align-items-center">
 							<div class="col-xl-2 col-lg-3 col-11">
-								<a href="./index.html" class="logo">
+								<a href="/" class="logo">
 									<img src="images/new/logo.webp" alt="North Shore Judo Logo" width="200" height="143">
 								</a>
 							</div>
@@ -185,17 +187,13 @@
 								<!-- main nav start -->
 								<nav class="top-nav">
 									<ul class="nav sf-menu">
-										<li><a href="#box_wrapper">Home</a></li>
-										<li>
-											<a href="#about">About</a>
-										</li>
-										<li>
-											<a href="#classes">Classes</a>
-										</li>
-
-										<li>
-											<a href="#lowerqinfo">Contact</a>
-										</li>
+										<li><a href="/">Home</a></li>
+										<li><a href="/about/">About</a></li>
+										<li><a href="/classes/">Classes</a></li>
+										<li><a href="/coaches/">Coaches</a></li>
+										<li><a href="/pricing/">Pricing</a></li>
+										<li><a href="/faq/">FAQ</a></li>
+										<li><a href="/contact/">Contact</a></li>
 
 									</ul>
 								</nav>
@@ -205,7 +203,7 @@
 								<ul class="top-includes">
 									<li>
 										<span>
-											<a href="#classes" class=" btn rounded btn-outline-maincolor">FREE CLASS</a>
+											<a href="/contact/" class=" btn rounded btn-outline-maincolor">FREE CLASS</a>
 										</span>
 									</li>
 								</ul>
@@ -242,7 +240,7 @@
 														</p>
 													</div>
 													<div class="intro_layer button" data-animation="fadeInLeft">
-														<button onclick="location.href='#classes'"
+														<button onclick="location.href='/contact/'"
 															class="btn btn-maincolor intro_button">
 															GET A FREE CLASS
 														</button>
@@ -275,7 +273,7 @@
 															the art of Judo; "the gentle way".
 													</div>
 													<div class="intro_layer button" data-animation="fadeInLeft">
-														<button onclick="location.href='#classes'"
+														<button onclick="location.href='/contact/'"
 															class="btn btn-maincolor intro_button">
 															GET A FREE CLASS
 														</button>
@@ -309,7 +307,7 @@
 															<br>to train your Judo.
 													</div>
 													<div class="intro_layer button" data-animation="fadeInLeft">
-														<button onclick="location.href='#classes'"
+														<button onclick="location.href='/contact/'"
 															class="btn btn-maincolor intro_button">GET A FREE
 															CLASS</button>
 													</div>
@@ -337,8 +335,8 @@
 									<i class="fa fa-envelope"></i>
 								</div>
 								<span>EMAIL US</span>
-								<a href="mailto:northshorejudo@gmail.com">
-									<h5>northshorejudo@gmail.com</h5>
+								<a href="mailto:info@northshorejudo.co.nz">
+									<h5>info@northshorejudo.co.nz</h5>
 								</a>
 							</div>
 						</div>
@@ -350,7 +348,7 @@
 									<i class="fa fa-map-marker"></i>
 								</div>
 								<span>Takapuna, Auckland 0622</span>
-								<h5>34 BARRYS POINT ROAD</h5>
+								<h5><a href="https://www.google.com/maps/place/Live+to+Judo+-+North+Shore+Judo/" target="_blank" rel="noopener noreferrer">34 BARRYS POINT ROAD</a></h5>
 							</div>
 						</div>
 
@@ -382,7 +380,7 @@
 									<i class="fa fa-clock-o"></i>
 								</div>
 								<span>TRAINING HOURS</span>
-								<a href="#classes">
+								<a href="/classes/">
 									<h5> TUESDAY: 6PM - 10PM</h5>
 									<h5 style="padding-top: 10px;"> THURSDAY: 6:45PM - 10PM</h5>
 								</a>
@@ -418,8 +416,8 @@
 								recognised National Club Coach in 2006, North Shore Judo club members are actively
 								involved in local and international competitions. Our coaching team — Simon, Amber and
 								Doug — are passionate about making judo accessible, fun, and safe for everyone.
-								<a class="about-link" href="#classes">
-									<br> our classes <i class="fa fa-level-down" aria-hidden="true"></i>
+								<a class="about-link" href="/classes/">
+									<br> see all classes <i class="fa fa-level-down" aria-hidden="true"></i>
 								</a>
 							</p>
 
@@ -454,6 +452,7 @@
 							<div>
 								<h4>Judo Classes for Kids in Auckland</h4>
 								<p>Looking for kids judo classes in Auckland? Our Pee Wees programme starts from age 4, with dedicated Junior classes for 7-14 year olds. Small groups, experienced coaches, and a safe, fun environment — right here in Takapuna on the North Shore.</p>
+								<p>Learn more about classes for <a href="/classes/kids/">kids judo</a>, <a href="/classes/juniors/">junior judo</a>, and <a href="/classes/adults/">adult judo</a>. If you are comparing martial arts classes for fitness or self-defence in Auckland, our <a href="/pricing/">pricing</a> and <a href="/contact/">contact page</a> have the details you need.</p>
 							</div>
 
 							<div class="owl-carousel" data-loop="false" data-margin="30" data-nav="true"
@@ -601,10 +600,50 @@
 
 							</div>
 						</div>
+						<div class="text-center mt-4">
+							<a class="btn btn-maincolor" href="/coaches/">View Coach Bios</a>
+						</div>
 
 
 					</div>
 					<div class="divider-70 d-none d-xl-block"></div>
+				</div>
+			</div>
+		</section>
+
+		<section id="testimonials" class="ds s-py-60 s-py-md-90">
+			<div class="container">
+				<div class="row">
+					<div class="col-12 text-center">
+						<h2 class="special-heading">WHAT OUR MEMBERS SAY</h2>
+						<p style="max-width: 760px; margin: 0 auto;">Testimonials from North Shore families and adult members who train with us in Takapuna.</p>
+					</div>
+				</div>
+				<div class="row c-gutter-30 mt-4">
+					<div class="col-md-4">
+						<div class="vertical-item box-shadow content-padding text-center">
+							<div class="item-content">
+								<p>"The coaches made our daughter feel welcome from her very first class. Her confidence and focus have improved so much."</p>
+								<p class="small-text color-main">Parent of Junior Member</p>
+							</div>
+						</div>
+					</div>
+					<div class="col-md-4">
+						<div class="vertical-item box-shadow content-padding text-center">
+							<div class="item-content">
+								<p>"Excellent structure and clear coaching for adults. Great training environment for fitness and practical self-defence confidence."</p>
+								<p class="small-text color-main">Adult Member, Takapuna</p>
+							</div>
+						</div>
+					</div>
+					<div class="col-md-4">
+						<div class="vertical-item box-shadow content-padding text-center">
+							<div class="item-content">
+								<p>"North Shore Judo balances discipline and fun really well. Our son has become stronger, more focused, and excited to train."</p>
+								<p class="small-text color-main">Parent of Pee Wees Student</p>
+							</div>
+						</div>
+					</div>
 				</div>
 			</div>
 		</section>
@@ -835,8 +874,8 @@
 								<i class="fa fa-envelope"></i>
 							</div>
 							<span>EMAIL US</span>
-							<a href="mailto:northshorejudo@gmail.com">
-								<h5>northshorejudo@gmail.com</h5>
+							<a href="mailto:info@northshorejudo.co.nz">
+								<h5>info@northshorejudo.co.nz</h5>
 							</a>
 						</div>
 					</div>
@@ -848,7 +887,7 @@
 								<i class="fa fa-map-marker"></i>
 							</div>
 							<span>Takapuna, Auckland 0622</span>
-							<h5>34 BARRYS POINT ROAD</h5>
+							<h5><a href="https://www.google.com/maps/place/Live+to+Judo+-+North+Shore+Judo/" target="_blank" rel="noopener noreferrer">34 BARRYS POINT ROAD</a></h5>
 						</div>
 					</div>
 
@@ -880,7 +919,7 @@
 								<i class="fa fa-clock-o"></i>
 							</div>
 							<span>TRAINING HOURS</span>
-							<a href="#classes">
+							<a href="/classes/">
 								<h5> TUESDAY: 6PM - 10PM</h5>
 								<h5 style="padding-top: 10px;"> THURSDAY: 6:45PM - 10PM</h5>
 							</a>
@@ -940,6 +979,15 @@
 							<p>The North Shore Judo Academy was founded in 1969 by Sensei Ron Jones (5th dan) and has
 								shared a love of Judo with thousands of players in that time, including the current
 								coaching team.</p>
+							<p><a href="mailto:info@northshorejudo.co.nz">info@northshorejudo.co.nz</a> | <a href="tel:+64278910027">+64 27 891 0027</a></p>
+							<p class="seo-footer-links">
+								<a href="/about/">About</a>
+								<a href="/classes/">Classes</a>
+								<a href="/coaches/">Coaches</a>
+								<a href="/pricing/">Pricing</a>
+								<a href="/faq/">FAQ</a>
+								<a href="/contact/">Contact</a>
+							</p>
 							<!-- <div class="widget widget_social_buttons">
 									<a href="https://www.facebook.com/" class="fa fa-facebook border-icon rounded-icon" title="facebook"></a>
 									<a href="https://twitter.com/" class="fa fa-twitter border-icon rounded-icon" title="twitter"></a>
@@ -1024,7 +1072,7 @@
 		"description": "Auckland's friendliest judo club in Takapuna, offering judo classes for kids, teens, and adults. Beginners welcome. Founded 1969.",
 		"url": "https://northshorejudo.co.nz/",
 		"telephone": "+64278910027",
-		"email": "northshorejudo@gmail.com",
+		"email": "info@northshorejudo.co.nz",
 		"image": "https://northshorejudo.co.nz/images/new/slide01new.webp",
 		"logo": "https://northshorejudo.co.nz/images/new/logo.webp",
 		"foundingDate": "1969",
@@ -1120,6 +1168,14 @@
 				"closes": "22:00"
 			}
 		],
+		"contactPoint": {
+			"@type": "ContactPoint",
+			"contactType": "customer service",
+			"telephone": "+64278910027",
+			"email": "info@northshorejudo.co.nz",
+			"availableLanguage": ["English"],
+			"areaServed": "Auckland"
+		},
 		"hasOfferCatalog": {
 			"@type": "OfferCatalog",
 			"name": "Judo Classes",
@@ -1195,7 +1251,8 @@
 		"sameAs": [
 			"https://www.google.com/maps?cid=1096467852599973946",
 			"https://www.facebook.com/groups/1521170187913128",
-			"https://www.google.com/maps/place/Live+to+Judo+-+North+Shore+Judo/"
+			"https://www.google.com/maps/place/Live+to+Judo+-+North+Shore+Judo/",
+			"https://northshorejudo.co.nz/contact/"
 		]
 	}
 	</script>
@@ -1269,6 +1326,54 @@
 				}
 			}
 		]
+	}
+	</script>
+	<script type="application/ld+json">
+	{
+		"@context": "https://schema.org",
+		"@type": "Review",
+		"itemReviewed": {
+			"@type": "SportsActivityLocation",
+			"name": "North Shore Judo",
+			"url": "https://northshorejudo.co.nz/"
+		},
+		"reviewBody": "The coaches made our daughter feel welcome from her very first class. Her confidence and focus have improved so much.",
+		"author": {
+			"@type": "Person",
+			"name": "Parent of Junior Member"
+		}
+	}
+	</script>
+	<script type="application/ld+json">
+	{
+		"@context": "https://schema.org",
+		"@type": "Review",
+		"itemReviewed": {
+			"@type": "SportsActivityLocation",
+			"name": "North Shore Judo",
+			"url": "https://northshorejudo.co.nz/"
+		},
+		"reviewBody": "Excellent structure and clear coaching for adults. Great training environment for fitness, fun and progression",
+		"author": {
+			"@type": "Person",
+			"name": "Adult Member, Takapuna"
+		}
+	}
+	</script>
+	<script type="application/ld+json">
+	{
+		"@context": "https://schema.org",
+		"@type": "Review",
+		"itemReviewed": {
+			"@type": "SportsActivityLocation",
+			"name": "North Shore Judo",
+			"url": "https://northshorejudo.co.nz/"
+		},
+		"reviewBody": "North Shore Judo balances discipline and fun really well. Our son has become stronger, more focused, and excited to train.",
+		"author": {
+			"@type": "Person",
+			"name": "Parent of Pee Wees Student"
+		}
 	}
 	</script>
 	<script type="application/ld+json">
