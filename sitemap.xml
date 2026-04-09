@@ -75,4 +75,25 @@
   <priority>0.80</priority>
 </url>
 
+<url>
+  <loc>https://northshorejudo.co.nz/guides/</loc>
+  <lastmod>2026-04-09T00:00:00+12:00</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.72</priority>
+</url>
+
+<url>
+  <loc>https://northshorejudo.co.nz/guides/judo-benefits-kids-auckland/</loc>
+  <lastmod>2026-04-09T00:00:00+12:00</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.70</priority>
+</url>
+
+<url>
+  <loc>https://northshorejudo.co.nz/guides/adult-beginner-judo-auckland/</loc>
+  <lastmod>2026-04-09T00:00:00+12:00</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.70</priority>
+</url>
+
 </urlset>
