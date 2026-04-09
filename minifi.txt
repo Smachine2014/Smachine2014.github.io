@@ -1,0 +1,2 @@
+npx -y clean-css-cli -o css/seo-pages.min.css css/seo-pages.css
+npx -y terser js/signup-modal.js -o js/signup-modal.min.js --compress --mangle
