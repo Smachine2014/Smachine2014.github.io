@@ -292,10 +292,14 @@
     }
 
     function openModal(tracking) {
+      console.log("openModal called");
       onlineButton.href = buildJoinUrl(tracking, "modal_online");
-      inPersonButton.href = buildContactUrl(tracking, "modal_in_person");
+      if (inPersonButton) {
+        inPersonButton.href = buildContactUrl(tracking, "modal_in_person");
+      }
 
       backdrop.removeAttribute("hidden");
+      console.log("showing backdrop");
       backdrop.classList.add("is-open");
       document.body.classList.add("signup-modal-open");
       closeButton.focus();
@@ -319,6 +323,11 @@
       var tracking;
       var href;
       var hasJoinHref;
+
+      // Don't intercept buttons that are already inside the modal itself
+      if (backdrop.contains(trigger)) {
+        return;
+      }
 
       if (!shouldHandleTrigger(trigger)) {
         return;

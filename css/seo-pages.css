@@ -390,13 +390,17 @@ body.signup-modal-open {
 	display: flex;
 	align-items: center;
 	justify-content: center;
+	box-sizing: border-box;
+	padding: 0;
 	width: 44px;
 	height: 44px;
+	min-width: 44px;
+	flex-shrink: 0;
 	border: 2px solid rgba(255, 255, 255, 0.5);
 	border-radius: 50%;
 	background: rgba(255, 255, 255, 0.1);
 	color: #fff;
-	font-size: 26px;
+	font-size: 20px;
 	line-height: 1;
 	cursor: pointer;
 	transition: background 0.2s ease, border-color 0.2s ease, color 0.2s ease;
@@ -566,4 +570,8 @@ body.signup-modal-open {
 		width: 100%;
 		min-width: 0;
 	}
+}
+
+.signup-modal-actions .btn:hover {
+	color: #fff !important;
 }
