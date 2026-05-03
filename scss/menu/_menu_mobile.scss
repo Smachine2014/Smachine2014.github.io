@@ -131,6 +131,12 @@
     content: '\f107';
   }
 
+  @media screen and (min-width: 1200px) {
+    .sf-menu li.mobile-nav-cta {
+      display: none;
+    }
+  }
+
   /* Mobile CTA Button - appears as the last menu item */
   .sf-menu li.mobile-nav-cta {
     display: none;
