@@ -15273,6 +15273,46 @@ a img.aligncenter {
 	.sfHover > .sf-with-ul + .sf-menu-item-mobile-toggler:after {
 		content: "\f107";
 	}
+
+	/* Mobile CTA Button - appears as the last menu item */
+	.sf-menu li.mobile-nav-cta {
+		display: none;
+		position: relative;
+		z-index: 10;
+		padding: 20px 0 10px;
+		margin-top: 15px;
+		border-top: 2px solid rgba(233, 48, 48, 0.2);
+	}
+
+	.mobile-active .sf-menu li.mobile-nav-cta {
+		display: block;
+	}
+
+	.sf-menu li.mobile-nav-cta a {
+		display: block;
+		width: 100%;
+		padding: 15px 20px;
+		text-align: center;
+		font-weight: 600;
+		letter-spacing: 0.1em;
+		font-size: 16px;
+		border-radius: 4px;
+		transition: all 0.3s ease-in-out;
+		margin: 0;
+		text-transform: uppercase;
+	}
+
+	.sf-menu li.mobile-nav-cta a.btn-maincolor {
+		background-color: #e93030;
+		color: white;
+		border: 2px solid #e93030;
+	}
+
+	.sf-menu li.mobile-nav-cta a.btn-maincolor:hover {
+		background-color: #c92626;
+		border-color: #c92626;
+		box-shadow: 0 2px 8px rgba(233, 48, 48, 0.3);
+	}
 }
 
 /* Mega Menu */

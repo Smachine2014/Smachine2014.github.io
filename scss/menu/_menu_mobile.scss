@@ -130,4 +130,44 @@
   .sfHover > .sf-with-ul + .sf-menu-item-mobile-toggler:after {
     content: '\f107';
   }
+
+  /* Mobile CTA Button - appears as the last menu item */
+  .sf-menu li.mobile-nav-cta {
+    display: none;
+    position: relative;
+    z-index: 10;
+    padding: 20px 0 10px;
+    margin-top: 15px;
+    border-top: 2px solid rgba($colorMain, 0.2);
+
+    .mobile-active & {
+      display: block;
+    }
+
+    a {
+      display: block;
+      width: 100%;
+      padding: 15px 20px;
+      text-align: center;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      font-size: 16px;
+      border-radius: 4px;
+      transition: all 0.3s ease-in-out;
+      margin: 0;
+      text-transform: uppercase;
+
+      &.btn-maincolor {
+        background-color: $colorMain;
+        color: white;
+        border: 2px solid $colorMain;
+
+        &:hover {
+          background-color: darken($colorMain, 10%);
+          border-color: darken($colorMain, 10%);
+          box-shadow: 0 2px 8px rgba($colorMain, 0.3);
+        }
+      }
+    }
+  }
 }
