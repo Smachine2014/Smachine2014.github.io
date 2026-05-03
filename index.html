@@ -161,16 +161,38 @@
 			pointer-events: none;
 		}
 
-		.page_slider .slides>li .container {
+		/* Overlay slide text on top of the image (not below it in flow) */
+		.page_slider .slides > li {
 			position: relative;
-			z-index: 2;
 		}
 
-		/* Fix slider text positioning to avoid bottom clipping */
+		.page_slider .slides > li > .container {
+			position: absolute;
+			top: 0;
+			left: 0;
+			right: 0;
+			bottom: 0;
+			z-index: 2;
+			display: flex;
+			flex-direction: column;
+			justify-content: center;
+			/* Push content below the fixed header, keep it off the bottom */
+			padding-top: 110px;
+			padding-bottom: 30px;
+		}
+
+		/* Reset any legacy padding overrides on the wrapper itself */
 		.page_slider .intro_layers_wrapper {
-			align-items: center;
 			padding-top: 0 !important;
 			padding-bottom: 0 !important;
+		}
+
+		/* Hide mobile-only nav CTA on desktop — prevents duplicate button,
+		   ellipsis overflow in the nav bar, and the flash on page reload */
+		@media (min-width: 992px) {
+			.mobile-nav-cta {
+				display: none !important;
+			}
 		}
 	</style>
 	<script src="js/vendor/modernizr-custom.js"></script>
@@ -270,7 +292,7 @@
 								<div class="container">
 									<div class="row">
 										<div class="col-md-12">
-											<div class="intro_layers_wrapper intro_text_bottom">
+											<div class="intro_layers_wrapper">
 												<div class="intro_layers">
 													<div class="intro_layer" data-animation="fadeInRight">
 														<h2 class="intro_featured_word special-heading">
@@ -307,7 +329,7 @@
 								<div class="container">
 									<div class="row">
 										<div class="col-md-12">
-											<div class="intro_layers_wrapper intro_text_bottom">
+											<div class="intro_layers_wrapper">
 												<div class="intro_layers">
 													<div class="intro_layer" data-animation="fadeInRight">
 														<h2 class="intro_featured_word special-heading">
@@ -342,7 +364,7 @@
 								<div class="container">
 									<div class="row">
 										<div class="col-md-12">
-											<div class="intro_layers_wrapper intro_text_bottom">
+											<div class="intro_layers_wrapper">
 												<div class="intro_layers">
 													<div class="intro_layer" data-animation="fadeInRight">
 														<h2 class="intro_featured_word special-heading">
