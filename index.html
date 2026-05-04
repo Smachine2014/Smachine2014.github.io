@@ -187,6 +187,44 @@
 			padding-bottom: 0 !important;
 		}
 
+		/* FIX 1: Hide the mobile CTA nav item on desktop.
+		   The existing display:none rule for .mobile-nav-cta lives inside a
+		   @media (max-width: 1199px) block, so it never applied on desktop —
+		   the button was taking up nav space and pushing "Contact" into the
+		   sf-more ellipsis overflow. */
+		@media (min-width: 1200px) {
+			.sf-menu li.mobile-nav-cta {
+				display: none !important;
+			}
+		}
+
+		/* FIX 2: Keep header as an absolute overlay at all desktop widths.
+		   main.css had @media(max-width: 1400px){ position: relative } which
+		   kicked in at ~110% zoom (shrinking the effective viewport below 1400px),
+		   making the header flow and push the slider down. We lock it to absolute
+		   for any viewport ≥ 1200px (the Bootstrap XL breakpoint). */
+		@media (min-width: 1200px) {
+			.header_absolute .page_header,
+			.header_absolute .page_header_wrapper {
+				position: absolute !important;
+			}
+		}
+
+		/* FIX 3: Solid header background.
+		   When in affix-top state (page at top), the theme sets
+		   page_header background-color: transparent and relies on the
+		   page_header_wrapper for the rgba(10,13,27,0.8) tint — producing
+		   a slightly see-through header. Override both to be fully opaque. */
+		.header_absolute .page_topline,
+		.header_absolute .page_toplogo,
+		.header_absolute .page_header_wrapper,
+		.header_absolute .page_title {
+			background-color: rgba(10, 13, 27, 0.97) !important;
+		}
+		#canvas:not(.boxed) .header_absolute .page_header.affix-top {
+			background-color: rgba(10, 13, 27, 0.97) !important;
+		}
+
 
 	</style>
 	<script src="js/vendor/modernizr-custom.js"></script>
