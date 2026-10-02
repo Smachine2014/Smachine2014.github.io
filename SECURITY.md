@@ -6,13 +6,15 @@ feed. Neither needs a Google API key in this repository.
 Before opening a pull request, run:
 
 ```sh
-python3 scripts/check-google-api-keys.py --base origin/main
+python3 scripts/check-google-api-keys.py --all-history
 ```
 
-CI runs on pull requests and pushes to main. It checks every new commit's
+CI runs on pull requests and pushes to main. It checks every reachable commit's
 tracked paths, files and commit message, including
 intermediate commits where a key was added and then deleted. It reports file
 paths and object IDs, never key values, and makes no Google API calls.
+Scanning the full history also works after a force-push, when the previous tip
+is no longer available in a fresh checkout.
 
 This check detects plaintext Google API keys; it is not a general secret scanner.
 A failed check does not undo a push or remove existing Git history. Remove the
