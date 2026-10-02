@@ -16,10 +16,14 @@ def git(*args):
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--base", help="Scan every new commit after this base too")
+    scope = parser.add_mutually_exclusive_group()
+    scope.add_argument("--base", help="Scan every new commit after this base too")
+    scope.add_argument("--all-history", action="store_true", help="Scan all commits reachable from HEAD")
     args = parser.parse_args()
     commits = {git("rev-parse", "HEAD").strip()}
-    if args.base:
+    if args.all_history:
+        commits.update(git("rev-list", "HEAD").splitlines())
+    elif args.base:
         if set(args.base) == {"0"}:
             commits.update(git("rev-list", "HEAD").splitlines())
         else:
