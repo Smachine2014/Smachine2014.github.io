@@ -9,7 +9,8 @@ Before opening a pull request, run:
 python3 scripts/check-google-api-keys.py --base origin/main
 ```
 
-CI checks every new commit's tracked files and commit message, including
+CI runs on pull requests and pushes to main. It checks every new commit's
+tracked paths, files and commit message, including
 intermediate commits where a key was added and then deleted. It reports file
 paths and object IDs, never key values, and makes no Google API calls.
 

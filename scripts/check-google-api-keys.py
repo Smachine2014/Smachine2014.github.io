@@ -27,20 +27,26 @@ def main():
             commits.update(git("rev-list", base.decode() + "..HEAD").splitlines())
 
     blobs = {}
+    tracked_paths = set()
     for commit in sorted(commits):
         for entry in git("ls-tree", "-r", "-z", commit.decode()).split(b"\0"):
             if not entry:
                 continue
             metadata, path = entry.split(b"\t", 1)
             _, kind, oid = metadata.split()
+            tracked_paths.add(path)
             if kind == b"blob":
                 blobs.setdefault(oid, set()).add(path)
 
     failures = 0
+    for path in sorted(tracked_paths):
+        if KEY.search(path):
+            safe_path = KEY.sub(b"[REDACTED]", path).decode(errors="replace")
+            print(f"Google API key detected in tracked path {safe_path!r}")
+            failures += 1
     for oid, paths in sorted(blobs.items()):
-        key_paths = [path for path in sorted(paths) if KEY.search(path)]
-        if KEY.search(git("cat-file", "blob", oid.decode())) or key_paths:
-            path = key_paths[0] if key_paths else min(paths)
+        if KEY.search(git("cat-file", "blob", oid.decode())):
+            path = min(paths)
             safe_path = KEY.sub(b"[REDACTED]", path).decode(errors="replace")
             print(f"Google API key detected in {safe_path!r} (blob {oid[:12].decode()})")
             failures += 1
