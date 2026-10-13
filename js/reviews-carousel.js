@@ -182,17 +182,21 @@
     var meta = createElement("div", "review-meta");
     var stars = createElement("span", "review-stars", getStarString(review.rating));
     var date = createElement("span", "review-date", review.dateLabel || "Recent review");
-    var quote = createElement("p", "review-text", '"' + review.text + '"');
-    var link = createElement("a", "review-source-link", "Read this review on Google");
+    var quote = createElement("p", "review-text", '“' + review.text + '”');
+    var link = createElement("a", "review-source-link", "Read on Google");
+
+    avatar.appendChild(createElement("span", "review-avatar-fallback", review.initials));
+    avatar.setAttribute("aria-hidden", "true");
 
     if (review.authorImage) {
       var image = createElement("img", "review-avatar-image");
-      image.src = review.authorImage;
-      image.alt = review.author + " avatar";
+      image.alt = "";
       image.loading = "lazy";
+      image.addEventListener("error", function () {
+        image.remove();
+      });
+      image.src = review.authorImage;
       avatar.appendChild(image);
-    } else {
-      avatar.appendChild(createElement("span", "review-avatar-fallback", review.initials));
     }
 
     link.href = review.reviewUrl;
@@ -256,7 +260,7 @@
     var reviews = payload.items;
     var meta = payload.meta;
     var stage = root.querySelector("[data-review-list]");
-    var dotsWrap = root.querySelector("[data-review-dots]");
+    var positionLabel = root.querySelector("[data-review-position]");
     var prevButton = root.querySelector("[data-review-prev]");
     var nextButton = root.querySelector("[data-review-next]");
     var statusLabel = root.querySelector("[data-review-status]");
@@ -295,20 +299,10 @@
       }
     }
 
-    function updateDots() {
-      var buttons;
-
-      if (!dotsWrap) {
-        return;
+    function updatePosition() {
+      if (positionLabel) {
+        positionLabel.textContent = (currentIndex + 1) + " / " + reviews.length;
       }
-
-      buttons = dotsWrap.querySelectorAll("button");
-
-      buttons.forEach(function (button, index) {
-        var isActive = index === currentIndex;
-        button.classList.toggle("is-active", isActive);
-        button.setAttribute("aria-current", isActive ? "true" : "false");
-      });
     }
 
     function render(animateIn) {
@@ -316,7 +310,7 @@
 
       stage.innerHTML = "";
       stage.appendChild(card);
-      updateDots();
+      updatePosition();
 
       if (animateIn) {
         window.requestAnimationFrame(function () {
@@ -330,25 +324,6 @@
     function goTo(nextIndex, animateIn) {
       currentIndex = nextIndex;
       render(animateIn);
-    }
-
-    function buildDots() {
-      if (!dotsWrap || reviews.length <= 1) {
-        return;
-      }
-
-      dotsWrap.innerHTML = "";
-
-      reviews.forEach(function (review, index) {
-        var dot = createElement("button", "review-dot");
-        dot.type = "button";
-        dot.setAttribute("aria-label", "Show review " + (index + 1) + " by " + review.author);
-        dot.addEventListener("click", function () {
-          goTo(index, true);
-          startCycle();
-        });
-        dotsWrap.appendChild(dot);
-      });
     }
 
     if (prevButton) {
@@ -386,7 +361,6 @@
       }
     });
 
-    buildDots();
     render(false);
     startCycle();
 
