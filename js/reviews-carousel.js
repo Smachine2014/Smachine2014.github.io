@@ -173,7 +173,7 @@
     return value;
   }
 
-  function buildReviewCard(review) {
+  function buildReviewCard(review, forMeasurement) {
     var article = createElement("article", "review-card-live is-entering");
     var head = createElement("div", "review-card-head");
     var avatar = createElement("div", "review-avatar");
@@ -188,7 +188,7 @@
     avatar.appendChild(createElement("span", "review-avatar-fallback", review.initials));
     avatar.setAttribute("aria-hidden", "true");
 
-    if (review.authorImage) {
+    if (review.authorImage && !forMeasurement) {
       var image = createElement("img", "review-avatar-image");
       image.alt = "";
       image.loading = "lazy";
@@ -210,8 +210,8 @@
     head.appendChild(avatar);
     head.appendChild(profile);
 
-    article.appendChild(head);
     article.appendChild(quote);
+    article.appendChild(head);
     article.appendChild(link);
 
     return article;
@@ -266,11 +266,22 @@
     var statusLabel = root.querySelector("[data-review-status]");
     var currentIndex = 0;
     var timer = null;
+    var hovered = root.matches(":hover");
+    var focused = root.contains(document.activeElement);
+    var manuallyPaused = false;
+    var animations = [];
+    var renderVersion = 0;
+    var reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+    var measurementFrame = null;
+    var forceMeasurement = false;
+    var measuredWidth = 0;
 
     if (!stage || !reviews.length) {
       setUnavailableStatus(root, meta);
       return false;
     }
+
+    stage.setAttribute("aria-live", "off");
 
     updateReviewLink(root, "[data-review-google-link]", meta.reviewsUrl);
 
@@ -284,7 +295,7 @@
 
     function clearCycle() {
       if (timer) {
-        window.clearInterval(timer);
+        window.clearTimeout(timer);
         timer = null;
       }
     }
@@ -292,9 +303,11 @@
     function startCycle() {
       clearCycle();
 
-      if (reviews.length > 1) {
-        timer = window.setInterval(function () {
+      if (reviews.length > 1 && !hovered && !focused && !manuallyPaused && !document.hidden && !reducedMotion.matches) {
+        timer = window.setTimeout(function () {
+          timer = null;
           goTo((currentIndex + 1) % reviews.length, true);
+          startCycle();
         }, AUTO_ADVANCE_MS);
       }
     }
@@ -305,20 +318,106 @@
       }
     }
 
+    function stageWidth() {
+      var style = window.getComputedStyle(stage);
+      return stage.getBoundingClientRect().width
+        - (parseFloat(style.paddingLeft) || 0) - (parseFloat(style.paddingRight) || 0)
+        - (parseFloat(style.borderLeftWidth) || 0) - (parseFloat(style.borderRightWidth) || 0);
+    }
+
+    function measureStage(force) {
+      var width = stageWidth();
+      if (width <= 0) {
+        measuredWidth = 0;
+        return;
+      }
+      if (!force && Math.abs(width - measuredWidth) < 0.01) return;
+
+      var tallest = 0;
+      reviews.forEach(function (review) {
+        var card = buildReviewCard(review, true);
+        card.classList.remove("is-entering");
+        card.classList.add("is-measuring");
+        card.setAttribute("aria-hidden", "true");
+        card.setAttribute("inert", "");
+        card.style.cssText = "position:absolute;visibility:hidden;pointer-events:none;inset:0 auto auto 0;min-height:0;height:auto;max-height:none;transform:none;transition:none;width:" + width + "px";
+        stage.appendChild(card);
+        try {
+          tallest = Math.max(tallest, card.getBoundingClientRect().height);
+        } finally {
+          card.remove();
+        }
+      });
+
+      measuredWidth = width;
+      if (tallest > 0) {
+        var height = Math.ceil(tallest) + "px";
+        stage.style.minHeight = height;
+        stage.style.setProperty("--review-stage-height", height);
+      }
+    }
+
+    function scheduleMeasurement(force) {
+      forceMeasurement = forceMeasurement || force;
+      if (measurementFrame !== null) return;
+      measurementFrame = window.requestAnimationFrame(function () {
+        measurementFrame = null;
+        var shouldForce = forceMeasurement;
+        forceMeasurement = false;
+        measureStage(shouldForce);
+      });
+    }
+
     function render(animateIn) {
+      var outgoing = stage.lastElementChild;
+      var outgoingStyle = outgoing ? window.getComputedStyle(outgoing) : null;
+      var outgoingOpacity = outgoingStyle ? outgoingStyle.opacity : "1";
+      var outgoingTransform = outgoingStyle ? outgoingStyle.transform : "none";
       var card = buildReviewCard(reviews[currentIndex]);
+      var version = ++renderVersion;
+
+      animations.forEach(function (animation) { animation.cancel(); });
+      animations = [];
 
       stage.innerHTML = "";
+      card.classList.remove("is-entering");
       stage.appendChild(card);
       updatePosition();
 
-      if (animateIn) {
-        window.requestAnimationFrame(function () {
-          card.classList.remove("is-entering");
-        });
-      } else {
-        card.classList.remove("is-entering");
-      }
+      if (!animateIn || !outgoing || reducedMotion.matches || typeof card.animate !== "function") return;
+
+      if (window.getComputedStyle(stage).position === "static") stage.style.position = "relative";
+      outgoing.classList.add("is-leaving");
+      outgoing.setAttribute("aria-hidden", "true");
+      outgoing.setAttribute("inert", "");
+      outgoing.querySelectorAll("a, button, [tabindex]").forEach(function (element) {
+        element.setAttribute("tabindex", "-1");
+      });
+      outgoing.style.position = "absolute";
+      outgoing.style.inset = "0 0 auto";
+      outgoing.style.pointerEvents = "none";
+      stage.insertBefore(outgoing, card);
+
+      var options = { duration: 180, easing: "cubic-bezier(0.2, 0, 0, 1)", fill: "both" };
+      animations = [
+        outgoing.animate([
+          { opacity: outgoingOpacity, transform: outgoingTransform },
+          { opacity: 0, transform: "translateY(-4px)" }
+        ], options),
+        card.animate([
+          { opacity: 0, transform: "translateY(6px)" },
+          { opacity: 1, transform: "translateY(0)" }
+        ], options)
+      ];
+
+      Promise.all(animations.map(function (animation) { return animation.finished; }))
+        .then(function () {
+          if (version !== renderVersion) return;
+          outgoing.remove();
+          animations.forEach(function (animation) { animation.cancel(); });
+          animations = [];
+        })
+        .catch(function () { /* A newer navigation cancelled this transition. */ });
     }
 
     function goTo(nextIndex, animateIn) {
@@ -328,23 +427,45 @@
 
     if (prevButton) {
       prevButton.addEventListener("click", function () {
+        manuallyPaused = true;
+        clearCycle();
+        stage.setAttribute("aria-live", "polite");
         var targetIndex = currentIndex === 0 ? reviews.length - 1 : currentIndex - 1;
         goTo(targetIndex, true);
-        startCycle();
       });
     }
 
     if (nextButton) {
       nextButton.addEventListener("click", function () {
+        manuallyPaused = true;
+        clearCycle();
+        stage.setAttribute("aria-live", "polite");
         goTo((currentIndex + 1) % reviews.length, true);
-        startCycle();
       });
     }
 
-    root.addEventListener("mouseenter", clearCycle);
-    root.addEventListener("mouseleave", startCycle);
-    root.addEventListener("focusin", clearCycle);
-    root.addEventListener("focusout", startCycle);
+    root.addEventListener("mouseenter", function () { hovered = true; clearCycle(); });
+    root.addEventListener("mouseleave", function () { hovered = false; startCycle(); });
+    root.addEventListener("focusin", function () { focused = true; clearCycle(); });
+    root.addEventListener("focusout", function (event) {
+      if (root.contains(event.relatedTarget)) return;
+      focused = false;
+      startCycle();
+    });
+    document.addEventListener("visibilitychange", startCycle);
+
+    function onMotionChange() {
+      if (reducedMotion.matches) {
+        renderVersion += 1;
+        animations.forEach(function (animation) { animation.cancel(); });
+        animations = [];
+        stage.querySelectorAll(".is-leaving").forEach(function (card) { card.remove(); });
+      }
+      startCycle();
+    }
+
+    if (reducedMotion.addEventListener) reducedMotion.addEventListener("change", onMotionChange);
+    else reducedMotion.addListener(onMotionChange);
     root.addEventListener("keydown", function (event) {
       if (event.key === "ArrowLeft") {
         event.preventDefault();
@@ -362,6 +483,18 @@
     });
 
     render(false);
+    measureStage(true);
+    window.addEventListener("resize", function () { scheduleMeasurement(true); });
+    if (typeof window.ResizeObserver === "function") {
+      var resizeObserver = new window.ResizeObserver(function () { scheduleMeasurement(false); });
+      resizeObserver.observe(stage);
+    }
+    if (document.fonts) {
+      document.fonts.ready.then(function () { scheduleMeasurement(true); });
+      if (document.fonts.addEventListener) {
+        document.fonts.addEventListener("loadingdone", function () { scheduleMeasurement(true); });
+      }
+    }
     startCycle();
 
     if (statusLabel) {

@@ -209,6 +209,7 @@
     modal.setAttribute("role", "dialog");
     modal.setAttribute("aria-modal", "true");
     modal.setAttribute("aria-labelledby", "signupModalTitle");
+    modal.setAttribute("tabindex", "-1");
 
     closeButton.type = "button";
     closeButton.className = "signup-modal-close";
@@ -282,24 +283,42 @@
     var closeButton = backdrop.querySelector("[data-signup-modal-close]");
     var onlineButton = backdrop.querySelector("[data-signup-online]");
     var inPersonButton = backdrop.querySelector("[data-signup-inperson]");
+    var modal = backdrop.querySelector(".signup-modal");
     var triggerSelector = "a.btn, button.btn, a.intro_button, button.intro_button, [data-signup-trigger]";
     var triggers = document.querySelectorAll(triggerSelector);
+    var returnFocus = null;
+
+    function focusableElements() {
+      return Array.prototype.filter.call(
+        modal.querySelectorAll('a[href], button, input, select, textarea, [tabindex]'),
+        function (element) {
+          return !element.disabled && element.tabIndex >= 0 && element.getClientRects().length > 0;
+        }
+      );
+    }
 
     function closeModal() {
       backdrop.classList.remove("is-open");
       backdrop.setAttribute("hidden", "");
       document.body.classList.remove("signup-modal-open");
+
+      var target = returnFocus;
+      returnFocus = null;
+      if (target && !target.getClientRects().length) {
+        var header = target.closest(".club-header");
+        target = header ? header.querySelector(".club-menu-toggle") : null;
+      }
+      if (target && target.isConnected) target.focus();
     }
 
-    function openModal(tracking) {
-      console.log("openModal called");
+    function openModal(tracking, trigger) {
+      returnFocus = trigger || document.activeElement;
       onlineButton.href = buildJoinUrl(tracking, "modal_online");
       if (inPersonButton) {
         inPersonButton.href = buildContactUrl(tracking, "modal_in_person");
       }
 
       backdrop.removeAttribute("hidden");
-      console.log("showing backdrop");
       backdrop.classList.add("is-open");
       document.body.classList.add("signup-modal-open");
       closeButton.focus();
@@ -314,8 +333,32 @@
     });
 
     document.addEventListener("keydown", function (event) {
-      if (event.key === "Escape" && backdrop.classList.contains("is-open")) {
+      if (!backdrop.classList.contains("is-open")) return;
+
+      if (event.key === "Escape") {
+        event.preventDefault();
         closeModal();
+      } else if (event.key === "Tab") {
+        var elements = focusableElements();
+        var first = elements[0];
+        var last = elements[elements.length - 1];
+        if (!first) {
+          event.preventDefault();
+          modal.focus();
+        } else if (event.shiftKey && (document.activeElement === first || !modal.contains(document.activeElement))) {
+          event.preventDefault();
+          last.focus();
+        } else if (!event.shiftKey && (document.activeElement === last || !modal.contains(document.activeElement))) {
+          event.preventDefault();
+          first.focus();
+        }
+      }
+    });
+
+    document.addEventListener("focusin", function (event) {
+      if (backdrop.classList.contains("is-open") && !modal.contains(event.target)) {
+        var elements = focusableElements();
+        (elements[0] || modal).focus();
       }
     });
 
@@ -350,7 +393,7 @@
 
       trigger.addEventListener("click", function (event) {
         event.preventDefault();
-        openModal(tracking);
+        openModal(tracking, trigger);
       });
     });
   }

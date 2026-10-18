@@ -1,0 +1,337 @@
+/* North Shore Judo: dark club identity, mobile-first layouts. */
+:root{color-scheme:dark;--club-paper:#121214;--club-navy:#09090b;--club-surface:#1b1b1e;--club-ink:#f4f1ec;--club-muted:#aaa9af;--club-red:#d32f3d;--club-accent:#ff6972;--club-line:#353638;--club-font:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+html{user-select:auto;scroll-padding-top:24px}
+body.site-polished{background:var(--club-paper);color:var(--club-ink);font:400 16px/1.7 var(--club-font);-webkit-font-smoothing:antialiased}
+.site-polished #canvas,.site-polished #box_wrapper{overflow:clip}
+.site-polished .container{width:100%;max-width:1240px;padding:0 22px}
+.site-polished .ds,.site-polished .ds.ms,.site-polished .cs{background:var(--club-paper);color:var(--club-ink)}
+.site-polished h1,.site-polished h2,.site-polished h3,.site-polished h4,.site-polished h5,.site-polished h6{font-family:var(--club-font);color:inherit;font-weight:750;letter-spacing:-.035em;line-height:1.12;text-transform:none;text-shadow:none;word-break:normal;overflow-wrap:break-word;text-wrap:balance;margin:0 0 22px}
+.site-polished h1{font-size:38px}.site-polished h2{font-size:30px}.site-polished h3{font-size:23px}.site-polished h4{font-size:21px}.site-polished h5{font-size:20px}
+.site-polished .special-heading{padding:0;text-shadow:none!important}
+.site-polished .special-heading::before,.site-polished .special-heading::after{display:none}
+.site-polished p{margin:0 0 22px;text-wrap:pretty}.site-polished p:last-child{margin-bottom:0}
+.site-polished a,.site-polished .ds a:not(.btn){color:var(--club-accent);text-underline-offset:4px;transition:color .18s ease,background-color .18s ease,border-color .18s ease}
+.site-polished a:hover,.site-polished .ds a:not(.btn):hover{color:#fff}
+.site-polished strong,.site-polished .ds strong{color:inherit;font-weight:700}
+.site-polished a:focus-visible,.site-polished button:focus-visible,.site-polished [tabindex]:focus-visible{outline:2px solid var(--club-accent);outline-offset:5px}
+.site-polished main:focus{outline:none}
+.site-polished .skip-link{position:fixed;top:10px;left:15px;z-index:1000;padding:12px 20px;background:var(--club-ink);color:#111;transform:translateY(-160%)}
+.site-polished .skip-link:focus{transform:translateY(0)}
+.site-polished .btn{display:inline-flex;align-items:center;justify-content:center;gap:12px;min-height:50px;padding:14px 22px;border-radius:0!important;font:700 14px/1.4 var(--club-font);letter-spacing:0;text-transform:none;white-space:normal;transition:background-color .18s ease,border-color .18s ease,color .18s ease,transform .18s ease}
+.site-polished .btn.btn-maincolor{color:#fff;background:var(--club-red);border:1px solid var(--club-red)}
+.site-polished .btn.btn-maincolor:hover{background:#b92231;border-color:#b92231;color:#fff}
+.site-polished .btn.btn-outline-maincolor{color:var(--club-ink);background:transparent;border:1px solid #64666a}
+.site-polished .btn.btn-outline-maincolor:hover{background:#292a2b;border-color:#afb0b2;color:#fff}
+.site-polished .btn:active,.site-polished .review-control:active{transform:scale(.96)}
+.site-polished .btn>span[aria-hidden]{display:none}
+.site-polished .section-label,.site-polished .page-kicker{display:block;margin:0 0 16px;padding:0;border:0;border-radius:0;color:var(--club-accent);font:700 12px/1.5 var(--club-font);letter-spacing:.08em;text-transform:uppercase}
+.site-polished .text-link span[aria-hidden]{display:none}
+.site-polished .text-link{display:inline-flex;align-items:center;min-height:46px;color:var(--club-ink);font-size:14px;font-weight:700;text-decoration:underline;text-underline-offset:6px}
+/* Masthead: actual club mark, practical navigation, no decorative qualifiers. */
+.site-polished .move-banner{display:block;position:static;background:#242425;color:#dddedf;padding:10px 20px;text-align:center;font-size:12px;line-height:1.5}
+.site-polished .move-banner span{margin-left:10px;text-decoration:underline;text-underline-offset:3px}
+.site-polished .club-header{background:var(--club-navy);color:#fff;border-top:4px solid var(--club-red);position:relative;z-index:30}
+.site-polished .club-masthead{display:grid;grid-template-columns:minmax(0,1fr) auto 44px;align-items:center;gap:16px;min-height:82px}
+.site-polished .club-brand{grid-column:1;grid-row:1;justify-self:start;display:flex;align-items:center;gap:20px;color:#fff}
+.site-polished .club-brand img{display:block;width:84px;height:60px;object-fit:contain}
+.site-polished .brand-wordmark{display:none}.site-polished .header-location{display:none}
+.site-polished .header-trial{grid-column:2;grid-row:1;min-height:44px;display:flex;align-items:center;justify-content:center;color:#fff;padding:8px 12px;border:1px solid #6d6367;font-size:12px;font-weight:700;white-space:nowrap}
+.site-polished .header-trial:hover{background:var(--club-red);border-color:var(--club-red)}
+.site-polished .club-menu-toggle{grid-column:3;grid-row:1;display:none;width:44px;height:46px;padding:0;border:0;background:transparent;color:#fff;font:700 11px var(--club-font)}
+.site-polished .has-menu-js .club-menu-toggle{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px}
+.site-polished .menu-lines{width:24px;height:10px;border-top:2px solid currentColor;border-bottom:2px solid currentColor;transition:transform .2s ease}
+.site-polished [data-menu-open="true"] .menu-lines{height:0;border-bottom:0;transform:rotate(45deg)}
+.site-polished [data-menu-open="true"] .menu-lines::after{content:"";display:block;border-top:2px solid currentColor;transform:rotate(90deg);margin-top:-2px}
+.site-polished .club-navigation{background:#161617;border-top:1px solid var(--club-line)}
+.site-polished .club-nav-inner{display:flex;flex-direction:column;padding-top:12px;padding-bottom:20px}
+.site-polished .club-navigation a{display:flex;align-items:center;justify-content:space-between;min-height:55px;padding:12px 0;border-bottom:1px solid #313234;color:#ececed;font-size:22px;font-weight:700;letter-spacing:-.02em}
+.site-polished .club-navigation a::after{content:'→';color:#717377;font-size:20px;font-weight:400}
+.site-polished .club-navigation a[aria-current]{color:var(--club-accent)}
+.site-polished .has-menu-js .club-navigation{display:none}
+.site-polished .has-menu-js[data-menu-open="true"] .club-navigation{display:block;animation:menu-in .18s ease-out}
+@keyframes menu-in{from{opacity:0;transform:translateY(-6px)}to{opacity:1;transform:translateY(0)}}
+/* Home: a club poster, not a row of promotional pills. */
+.site-polished .club-hero{position:relative;isolation:isolate;padding:250px 0 38px;background:#101012}
+.site-polished .hero-grid{display:block}
+.site-polished .hero-photo{position:absolute;inset:0 0 auto;height:290px;margin:0;z-index:-1;overflow:hidden}
+.site-polished .hero-photo img{display:block;width:100%;height:100%;object-fit:cover;object-position:center 35%}
+.site-polished .hero-photo::after{content:"";position:absolute;inset:0;background:linear-gradient(0deg,#101012 0%,transparent 65%)}
+.site-polished .hero-copy h2{font-size:64px;line-height:.92;letter-spacing:-.065em;font-weight:900;text-transform:uppercase;margin-bottom:24px}
+.site-polished .hero-copy h2 span{color:var(--club-accent);font-style:italic;font-size:1em;letter-spacing:-.055em;white-space:nowrap}
+.site-polished .hero-copy>p{font-size:16px;line-height:1.65;max-width:39ch;color:#c9cacb}
+.site-polished .hero-actions{display:flex;align-items:center;gap:22px;flex-wrap:wrap;margin-top:26px}
+.site-polished .hero-actions .btn{min-width:178px}
+.site-polished a.hero-offer{display:grid;gap:3px;width:fit-content;max-width:100%;margin-top:28px;padding:1px 0 1px 15px;border-left:2px solid var(--club-red);color:#a7a4a7;font-size:12px;line-height:1.6}
+.site-polished .hero-offer strong{font-size:15px;font-weight:600;color:#f4f1ec}
+.site-polished .hero-offer s{color:#bcb8bc;text-decoration-thickness:1px}
+.site-polished .hero-offer:hover strong{color:var(--club-accent)}
+.site-polished .club-section{padding:48px 0}
+.site-polished .section-heading{margin-bottom:28px}
+.site-polished .section-heading p{color:var(--club-muted);max-width:64ch;text-align:left!important;margin:0!important}
+.site-polished .section-heading h2{margin-bottom:16px}
+/* One timetable: shared day and fee, clear choices, no repeated stock photos. */
+.site-polished .club-classes{background:#1b1b1e}
+.site-polished .class-schedule-heading{display:flex;justify-content:space-between;align-items:center;gap:24px;margin-bottom:25px}
+.site-polished .class-schedule-heading h2{margin:0;font-size:30px;max-width:8ch;line-height:1.05}
+.site-polished .class-schedule-heading p{margin:0;color:#c2c0be;font-size:13px;line-height:1.6;text-align:right;white-space:nowrap}
+.site-polished .class-schedule-heading strong{display:block;font-size:30px;line-height:1.2;letter-spacing:-.045em;color:#f4f1ec;font-weight:600}
+.site-polished .class-schedule-heading strong span{font-size:14px;letter-spacing:0;font-weight:400}
+.site-polished .class-schedule{background:#eeece6;border-radius:4px;padding:0 20px;color:#1b1b1e;box-shadow:0 8px 30px rgba(0,0,0,.12)}
+.site-polished a.schedule-row{display:grid;grid-template-columns:minmax(0,1fr) auto 18px;gap:14px;align-items:center;min-height:106px;color:#1b1b1e;border-bottom:1px solid #cccac4}
+.site-polished .schedule-row:last-child{border-bottom:0}
+.site-polished .schedule-class{display:grid;gap:2px}
+.site-polished .schedule-class strong{font-size:23px;font-weight:600;letter-spacing:-.035em;line-height:1.25}
+.site-polished .schedule-class>span{font-size:14px;color:#62625f}
+.site-polished .schedule-time{font-size:16px;font-weight:500;letter-spacing:-.02em;font-variant-numeric:tabular-nums;white-space:nowrap}
+.site-polished .schedule-time>span{font-size:13px}
+.site-polished .schedule-arrow{font-size:22px;color:#a2343d;transition:transform .18s ease}
+.site-polished a.schedule-row:hover{color:#b42332}.site-polished .schedule-row:hover .schedule-arrow{transform:translate(2px,-2px)}
+.site-polished .class-terms{font-size:12px;line-height:1.7;color:#a6a7aa;margin:20px auto 0;text-align:center;max-width:58ch}
+.site-polished .classes-detail{margin:40px auto 0;padding:32px 0 0;border-top:1px solid #393a3c}
+.site-polished .classes-detail h3{font-size:23px;margin-bottom:24px}
+.site-polished .classes-detail-copy p{color:#b6b7ba;font-size:15px;line-height:1.8}
+.site-polished .classes-signup{text-align:center;margin-top:30px}
+/* The club story has an introduction and two readable columns, without template labels. */
+.site-polished .club-about{background:#111113}
+.site-polished .about-intro{display:grid;gap:24px;margin-bottom:32px}
+.site-polished .about-intro h2{font-size:36px;line-height:1.06;letter-spacing:-.05em;font-weight:600;margin:0}
+.site-polished .about-intro h2 span{color:#a7a6a5}
+.site-polished .about-intro>p{font-size:19px;line-height:1.6;color:#e3e1dd;margin:0}
+.site-polished .about-story{display:grid;gap:22px}
+.site-polished .about-story p{font-size:15px;line-height:1.85;color:#aaa9ac;margin:0}
+.site-polished .about-story strong{font-weight:500;color:#d1ced0}
+/* The coach photo, names and action form one feature at every size. */
+.site-polished .club-section.club-team{background:#111113;padding-top:0}
+.site-polished .coach-feature{overflow:hidden;background:#232326;border-radius:4px;box-shadow:0 12px 35px rgba(0,0,0,.12)}
+.site-polished .coach-photo{position:relative;margin:0;overflow:hidden;aspect-ratio:1.6}
+.site-polished .coach-photo img{display:block;width:100%;height:100%;object-fit:cover;object-position:50% 40%;outline:1px solid rgba(255,255,255,.1);outline-offset:-1px}
+.site-polished .coach-photo::after{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(0deg,rgba(0,0,0,.14),transparent 45%)}
+.site-polished .coach-copy{padding:28px}
+.site-polished .coach-copy h2{font-size:37px;line-height:1.05;font-weight:600;letter-spacing:-.045em;margin-bottom:18px}
+.site-polished .coach-copy p{font-size:15px;line-height:1.7;color:#aaa9ad;margin-bottom:18px;max-width:38ch}
+.site-polished .coach-copy p:first-of-type{font-size:17px;line-height:1.7;color:#ccc9c8}
+.site-polished .coach-link{display:inline-flex;align-items:center;justify-content:space-between;gap:40px;min-height:48px;margin-top:8px;border-bottom:1px solid #777578;color:#f4f1ec;font-size:14px;font-weight:600}
+.site-polished .coach-link span{font-size:24px;font-weight:400;color:var(--club-accent)}
+/* Compact rating and a stable quote panel; attribution stays beside its quote. */
+.site-polished #testimonials{background:#1b1b1e}
+.site-polished .reviews-layout{display:grid;gap:24px}
+.site-polished .reviews-intro h2{font-size:30px;line-height:1.15;font-weight:600;margin:0 0 15px;letter-spacing:-.04em}
+.site-polished .ds a.reviews-summary{display:flex;flex-wrap:wrap;align-items:center;gap:8px 12px;width:fit-content;color:#aaa7ad;font-size:12px;line-height:1.6;min-height:28px}
+.site-polished .ds a.reviews-summary:hover{color:#fff}
+.site-polished .reviews-score{font-size:14px;font-weight:600;letter-spacing:-.02em;color:#f4f1ec;font-variant-numeric:tabular-nums}
+.site-polished .reviews-summary .review-chip-stars{font-size:11px;letter-spacing:.08em}
+.site-polished .review-carousel{padding:22px;border:0;border-radius:6px;background:#252528;box-shadow:0 8px 25px rgba(0,0,0,.08);min-width:0;margin:0;max-width:none}
+.site-polished .review-stage{position:relative;min-height:0}
+.site-polished .review-card-live{display:grid;grid-template-columns:minmax(0,1fr) auto;grid-template-rows:auto auto;gap:20px 14px;align-content:center;align-items:center;min-height:var(--review-stage-height,0px);transition:none}
+.site-polished .review-text{grid-column:1 / -1;color:#f0ede7;font-size:21px;line-height:1.5;font-weight:400;letter-spacing:-.025em;-webkit-line-clamp:4;margin:0}
+.site-polished .review-card-head{margin:0;min-width:0;gap:10px;align-self:center}
+.site-polished .review-avatar{width:32px;height:32px;flex-basis:32px;background:#4c4541}
+.site-polished h4.review-author{font:500 12px/1.4 var(--club-font);letter-spacing:0;margin:0 0 4px;overflow-wrap:anywhere}
+.site-polished .review-meta{font-size:10px;gap:7px}
+.site-polished .review-stars{font-size:10px}
+.site-polished .review-date{color:#a6a3a9}
+.site-polished .ds a.review-source-link{display:inline-flex;align-items:center;min-height:44px;color:#b5b2b5;font-size:11px;white-space:nowrap;text-decoration:underline;text-underline-offset:4px}
+.site-polished .ds a.review-source-link:hover{color:#fff}
+.site-polished .review-controls{margin-top:18px;justify-content:flex-end;gap:10px}
+.site-polished .review-carousel .review-control{border:0;background:#38383d;color:#f1efeb;border-radius:50%;width:42px;height:42px;flex-basis:42px;transition:background-color .18s ease,transform .18s ease}
+.site-polished .review-carousel .review-control:hover{background:#4c4b50}
+.site-polished .review-control svg{width:19px;height:19px}
+.site-polished .review-position{font-size:11px;color:#aaa7ad;min-width:40px}
+.site-polished .review-status{color:var(--club-muted);margin:0;font-size:14px}
+.site-polished #guides{background:#1a1b1c}.site-polished #guides .text-center{text-align:left!important}
+.site-polished #guides .text-center>p{margin:0!important;color:var(--club-muted)}
+.site-polished .resource-grid{gap:0}
+.site-polished .resource-card{padding:28px 0;background:transparent;border:0;border-top:1px solid #46474a;border-radius:0;display:flex;flex-direction:column;align-items:flex-start}
+.site-polished .resource-card h3{font-size:25px}.site-polished .resource-card p{color:#b9babc;font-size:16px}
+.site-polished .resource-card .btn{margin-top:auto;background:transparent;border:1px solid #727477}
+/* FAQ video intentionally hidden. Questions remain in their own readable column. */
+.site-polished #faq{background:#131313;padding:48px 0}
+.site-polished #faq>.container-fluid{max-width:1240px;padding:0 22px}
+.site-polished #faq .faq-section-left{display:none}
+.site-polished #faq .row>.col-lg-6:first-child{display:none}
+.site-polished #faq .row>.col-lg-6:last-child{flex:0 0 100%;max-width:100%}
+.site-polished #faq .faq-section-right{padding:0}
+.site-polished #faq h2{text-align:left!important}
+.site-polished #faq .card{border:0;border-bottom:1px solid #3c3d3f;border-radius:0;background:transparent;margin:0}
+.site-polished #faq .card-header{padding:0;border:0;background:transparent}
+.site-polished #faq .card-header h5{margin:0}
+.site-polished #faq .card-header a{display:block;padding:21px 30px 21px 0;position:relative;min-height:64px;font:700 16px/1.5 var(--club-font);color:var(--club-ink);letter-spacing:0;text-transform:none;background:transparent}
+.site-polished #faq .card-header a::before,.site-polished #faq .card-header i{display:none}
+.site-polished #faq .card-header a::after{position:absolute;right:0;top:20px;left:auto;color:var(--club-accent);font-size:22px;background:none}
+.site-polished #faq .card-body{padding:0 25px 25px 0;background:transparent;color:#b9babc;font-size:16px;line-height:1.7;max-width:76ch}
+.site-polished .relocation-section{background:#1d1e1f;border-top:1px solid #3e3f41}
+.site-polished .relocation-grid{display:grid;gap:30px;align-items:center}
+.site-polished .relocation-copy p{color:#b9babc;font-size:16px}.site-polished .relocation-copy .relocation-address{font-size:25px;color:#fff;font-weight:700;line-height:1.35}
+.site-polished .relocation-figure{margin:0}.site-polished .relocation-figure img{border:0;border-radius:0;outline:1px solid rgba(255,255,255,.1);outline-offset:-1px}
+.site-polished .relocation-figure figcaption{display:none}
+.site-polished .page_map.main-map{height:auto;min-height:0;padding:0}
+.site-polished .map-fullwidth{position:relative;left:auto;right:auto;margin:0;width:100%;max-width:100%}.site-polished .map-responsive{width:100%;height:300px;overflow:hidden;padding:0;margin:0}.site-polished .map-responsive iframe{display:block;width:100%;height:100%;border:0}
+.site-polished .contact-info{display:none}
+/* General pages: left aligned hierarchy and bounded reading width. */
+.site-polished .page-hero.ds.ms{background:#1d1e1f;padding:34px 0 38px;border-bottom:1px solid #3b3c3e}
+.site-polished .page-hero .text-center{text-align:left!important}
+.site-polished .page-hero h1{max-width:20ch;font-size:37px;margin:0 0 20px}
+.site-polished .page-hero .container>p:not(.breadcrumb-trail){max-width:64ch;margin:0;color:#c0c1c4;font-size:17px}
+.site-polished .breadcrumb-trail{display:none;margin:0 0 24px;font-size:12px;line-height:1.6;color:#a1a3a6;letter-spacing:0}
+.site-polished .page-hero .breadcrumb-trail{margin:24px 0 0}
+.site-polished.pricing-page .price-headline{color:var(--club-accent)}
+.site-polished.pricing-page .page-hero h1{font-size:45px;line-height:1.05;max-width:none}
+.site-polished .breadcrumb-trail a{margin-right:4px}
+.site-polished .content-section{padding:44px 0}
+.site-polished .content-section.ds.ms{background:#1a1b1c;border-top:1px solid #38393b}
+.site-polished .content-section p,.site-polished .content-section li{font-size:16px;line-height:1.75}
+.site-polished .content-section ul{padding-left:22px;margin-bottom:25px}.site-polished .content-section li{margin-bottom:9px;padding-left:4px}
+.site-polished .content-section .row{row-gap:30px}
+.site-polished .content-section img{max-width:100%;height:auto;display:block}
+.site-polished .info-grid,.site-polished .info-grid.two-col{grid-template-columns:1fr;gap:0}
+.site-polished .info-card{background:transparent;box-shadow:none;border:0;border-top:1px solid #48494b;border-radius:0;padding:26px 0}
+.site-polished .info-card h2,.site-polished .info-card h3{font-size:24px;line-height:1.25;margin:0 0 15px}
+.site-polished .info-card p{color:#bbbcbf}.site-polished .info-card .btn{margin-top:3px}
+/* Reset the template's adjacent-button margins; gaps belong to the group. */
+.site-polished .inline-links{display:flex;flex-wrap:wrap;align-items:center;gap:12px;margin-top:25px}
+.site-polished .inline-links>.btn{margin:0;min-width:0;max-width:100%;flex:0 1 auto}
+.site-polished .inline-links>.btn:only-child{margin:0}
+.site-polished .inline-links--navigation{display:flex;flex-wrap:wrap;gap:10px 22px}
+.site-polished .inline-links--navigation>.btn.btn-outline-maincolor{border:0;background:transparent;min-height:44px;padding:8px 0;font-weight:500;text-decoration:underline;text-underline-offset:5px;text-align:left;justify-content:flex-start;width:auto}
+.site-polished .inline-links--navigation>.btn.btn-outline-maincolor:hover{color:#fff}
+.site-polished .content-section .billing-note{font-size:13px;line-height:1.6;color:#959297;text-align:center;margin:18px auto 30px;max-width:55ch}
+.site-polished .getting-started{max-width:68ch;margin:0 auto}
+.site-polished .getting-started h3{font-size:23px;margin-bottom:14px}
+.site-polished .getting-started p{margin-bottom:12px}
+.site-polished .trial-start{display:grid;gap:28px;align-items:center}
+.site-polished .trial-start .inline-links{margin:0}
+.site-polished .trial-start h2{margin-bottom:20px}
+.site-polished .table-scroll{margin:26px 0;overflow-x:auto;border-radius:0}
+.site-polished .pricing-table{width:100%;min-width:600px;background:#191a1b;margin:0;font-size:16px;font-variant-numeric:tabular-nums}
+.site-polished .pricing-table th,.site-polished .pricing-table td{padding:19px 22px;border:0;border-bottom:1px solid #3f4042;vertical-align:middle;text-align:left}
+.site-polished .pricing-table thead th{background:#2d2e2f;color:var(--club-ink);font-size:14px;font-weight:700;letter-spacing:0}
+.site-polished .pricing-table td:last-child{color:#fff;font-weight:700;white-space:nowrap}
+.site-polished .quote-grid{grid-template-columns:1fr}.site-polished .quote-card{background:#202021;border:0;border-left:3px solid var(--club-red);padding:24px}
+.site-polished .class-switcher{padding:0;background:transparent;border:0}
+.site-polished .class-switcher-grid{display:grid;grid-template-columns:1fr;gap:0}
+.site-polished a.switch-card{padding:20px 0;background:transparent;border:0;border-top:1px solid #4a4b4d;color:var(--club-ink);position:relative}
+.site-polished .switch-card::after{content:'→';position:absolute;right:4px;top:25px;color:var(--club-accent)}
+.site-polished .switch-card strong{font-size:19px;font-weight:700;margin-bottom:4px}.site-polished .switch-card span{font-size:14px;opacity:1;color:#b8b9bc}
+.site-polished .switch-card:hover{transform:none;color:var(--club-accent)}
+/* Class pages: decisions first on a phone, photo and facts together on desktop. */
+.site-polished .class-detail-hero{background:#171819;padding:24px 0 0;border-bottom:1px solid #47484a}
+.site-polished .class-detail-grid{display:grid;gap:30px;min-width:0}
+.site-polished .class-detail-copy h1{font-size:37px;line-height:1.05;max-width:17ch;margin:0 0 22px}
+.site-polished .class-detail-copy>p:not(.section-label){font-size:16px;color:#c2c3c5;max-width:52ch;margin-bottom:24px}
+.site-polished .class-facts{margin:26px 0;border-top:1px solid #47484a;border-bottom:1px solid #47484a;padding:6px 0}
+.site-polished .class-facts>div{display:flex;justify-content:space-between;align-items:baseline;gap:14px;padding:11px 0;font-size:15px}
+.site-polished .class-facts span{color:#b3b4b6}.site-polished .class-facts strong{font-size:16px;font-variant-numeric:tabular-nums}
+.site-polished .class-facts>div:last-child strong{font-size:27px;letter-spacing:-.04em;color:#fff}
+.site-polished .class-facts>div:last-child strong::after{content:'/month';font-size:14px;font-weight:400;letter-spacing:0;margin-left:4px;color:#c0c1c4}
+.site-polished .class-detail-actions{display:flex;gap:16px;flex-wrap:wrap;align-items:center;margin:0 0 28px}
+.site-polished .class-detail-actions .btn{flex:1;min-width:170px}.site-polished .class-detail-actions .text-link{font-size:14px}
+.site-polished .class-detail-photo{margin:0 -22px;min-width:0;width:calc(100% + 44px);max-width:none}.site-polished .class-detail-photo img{display:block;width:100%;height:235px;object-fit:cover;outline:1px solid rgba(255,255,255,.1);outline-offset:-1px}
+.site-polished .class-detail-body{padding:42px 0 44px}
+.site-polished .class-body-grid{display:flex;flex-direction:column;gap:36px}
+.site-polished .class-article{min-width:0;max-width:72ch}.site-polished .class-article h2:not(:first-child){margin-top:40px}
+.site-polished .class-article p,.site-polished .class-article li{color:#c3c4c6}
+.site-polished .first-class-panel{order:-1;background:#262728;border-top:4px solid var(--club-red);padding:26px 23px;align-self:stretch;scroll-margin-top:20px}
+.site-polished .first-class-panel h2{font-size:26px}.site-polished .first-class-panel h3{font-size:21px}
+.site-polished .first-class-panel p,.site-polished .first-class-panel li{font-size:15px;line-height:1.65;color:#d0d1d3}
+.site-polished .first-class-panel .btn{width:100%;margin-top:8px}
+.site-polished .class-alternatives{padding:40px 0 46px;background:#1d1e1f;border-top:1px solid #464749}
+/* Footer rebuilt as a compact club directory. */
+.site-polished .club-footer{background:#0a0a0a;border-top:1px solid #3c3d3f;padding:38px 0 24px;color:#b2b3b6}
+.site-polished .footer-grid{display:grid;gap:30px}
+.site-polished .footer-identity img{width:110px;height:78px;object-fit:contain;margin-bottom:18px}
+.site-polished .footer-identity p{font-size:15px;line-height:1.65;max-width:45ch}
+.site-polished .club-footer h3{color:#fff;font-size:16px;letter-spacing:0;margin:0 0 16px}
+.site-polished .club-footer a{color:#d3d4d5;font-size:15px}
+.site-polished .footer-links{display:grid;grid-template-columns:1fr 1fr;gap:0 20px}
+.site-polished .footer-links a{display:flex;align-items:center;min-height:44px}
+.site-polished .footer-contact p{font-size:15px;line-height:1.7;margin-bottom:15px}
+.site-polished .footer-associations{display:flex;gap:24px;align-items:center;flex-wrap:wrap;padding:25px 0;margin-top:30px;border-top:1px solid #333436;border-bottom:1px solid #333436}
+.site-polished .footer-associations a{display:flex;align-items:center;gap:10px;font-size:12px;min-height:44px}
+.site-polished .footer-associations img{width:30px;height:30px;object-fit:contain}
+.site-polished .footer-bottom{display:flex;flex-direction:column;gap:10px;padding-top:22px;color:#919396;font-size:12px}
+.site-polished .footer-bottom p{font-size:12px;margin:0}.site-polished .footer-bottom a{font-size:12px;color:#a3a5a8}
+.site-polished #toTop{width:44px;height:44px;line-height:44px;border-radius:0;background:#424345;color:#fff}
+.site-polished .signup-modal{background:#1f1f20;color:var(--club-ink);border:1px solid #606164;border-radius:0;padding:30px 24px;max-width:560px}
+.site-polished .signup-modal h3{font:750 28px/1.2 var(--club-font);padding-right:30px;color:#fff;letter-spacing:-.035em}
+.site-polished .signup-modal p{color:#c3c4c6;font-size:16px}
+.site-polished .signup-modal-close{border:1px solid #65676a;background:transparent;color:#fff;border-radius:0;top:12px;right:12px}
+.site-polished .signup-modal-actions{margin-top:25px}.site-polished .signup-modal-actions .btn{width:100%}
+/* Tablet gets two-column utility content, without squeezing the reading column. */
+@media(min-width:600px){
+ .site-polished .review-carousel{padding:28px}.site-polished .review-text{font-size:23px}
+
+ .site-polished .class-schedule-heading h2{font-size:39px;max-width:none}.site-polished .class-schedule-heading strong{font-size:37px}
+ .site-polished .class-schedule{padding:0 32px}.site-polished a.schedule-row{min-height:104px;grid-template-columns:minmax(0,1fr) 180px 30px;gap:22px}.site-polished .schedule-class{gap:2px}.site-polished .schedule-class strong{font-size:29px}.site-polished .schedule-time{font-size:22px}.site-polished .schedule-time>span{font-size:15px}.site-polished .schedule-arrow{font-size:26px}
+ .site-polished .coach-feature{display:grid;grid-template-columns:1.05fr 1fr}.site-polished .coach-photo{aspect-ratio:auto;min-height:360px}.site-polished .coach-photo img{object-position:50% center}.site-polished .coach-copy{align-self:center;padding:32px}.site-polished .coach-copy h2{font-size:39px}
+ .site-polished .about-intro h2{font-size:46px}.site-polished .about-intro>p{font-size:22px}
+
+ .site-polished .container{padding-left:32px;padding-right:32px}
+ .site-polished .club-masthead{min-height:96px}.site-polished .club-brand img{width:100px;height:70px}
+ .site-polished .header-trial{padding:10px 22px;font-size:14px}
+ .site-polished .club-hero{padding:320px 0 50px}.site-polished .hero-photo{height:370px}.site-polished .hero-copy h2{font-size:92px;max-width:700px}
+ .site-polished .info-grid,.site-polished .info-grid.two-col{grid-template-columns:repeat(2,minmax(0,1fr));gap:0 32px}
+ .site-polished .class-detail-photo{margin:0 -32px;width:calc(100% + 64px)}.site-polished .class-detail-photo img{height:320px}
+ .site-polished .class-detail-actions .btn{flex:none}.site-polished .class-facts{max-width:500px}
+ .site-polished .class-switcher-grid{grid-template-columns:repeat(3,minmax(0,1fr));gap:25px}
+ .site-polished .footer-grid{grid-template-columns:1.3fr 1fr;gap:40px}.site-polished .footer-identity{grid-column:1 / -1}.site-polished .footer-bottom{flex-direction:row;justify-content:space-between}
+}
+@media(min-width:700px) and (max-width:899px){
+ .site-polished .hero-copy{display:grid;grid-template-columns:1fr 1fr;column-gap:30px;align-items:start}
+ .site-polished .hero-copy h2{grid-column:1;grid-row:1 / 4;font-size:80px;margin:0}
+ .site-polished .hero-copy>p,.site-polished .hero-actions,.site-polished .hero-offer{grid-column:2}
+ .site-polished .hero-copy>p{margin:0}.site-polished .hero-actions{margin-top:24px;gap:15px}.site-polished .hero-actions .btn{min-width:160px;padding:14px 18px}
+ .site-polished .hero-offer{margin-top:24px}
+}
+@media(min-width:900px){
+ .site-polished .reviews-layout{grid-template-columns:minmax(0,.75fr) minmax(0,1.5fr);gap:60px;align-items:center}
+ .site-polished .reviews-intro h2{font-size:40px;max-width:11ch;margin-bottom:22px}.site-polished .review-carousel{padding:32px}.site-polished .review-text{font-size:25px;-webkit-line-clamp:5}.site-polished .review-card-live{gap:24px 18px}
+ .site-polished .trial-start{grid-template-columns:minmax(0,1fr) 270px;gap:60px}.site-polished .trial-start .inline-links{display:grid;grid-template-columns:1fr}.site-polished .trial-start .btn{width:100%}
+
+ .site-polished .class-schedule-heading h2{font-size:48px}.site-polished .class-schedule-heading strong{font-size:44px}
+ .site-polished .class-schedule{padding:0 40px}.site-polished a.schedule-row{min-height:112px;grid-template-columns:1fr 270px 35px}.site-polished .schedule-class{grid-template-columns:1fr 160px}.site-polished .schedule-class strong{font-size:35px}.site-polished .schedule-class>span{font-size:16px}.site-polished .schedule-time{font-size:25px}
+ .site-polished .classes-detail-copy{display:grid;grid-template-columns:1fr 1fr;gap:60px}.site-polished .classes-detail h3{font-size:27px}.site-polished .classes-detail-copy p{font-size:16px}
+ .site-polished .about-intro{grid-template-columns:1fr 1.2fr;gap:80px;align-items:start;margin-bottom:42px}.site-polished .about-intro h2{font-size:54px}.site-polished .about-intro>p{font-size:22px}.site-polished .about-story{grid-template-columns:1fr 1fr;gap:70px}.site-polished .about-story p{font-size:16px}
+ .site-polished .coach-feature{grid-template-columns:1.25fr 1fr}.site-polished .coach-photo{min-height:380px}.site-polished .coach-copy{padding:42px}.site-polished .coach-copy h2{font-size:48px}
+
+ .site-polished.pricing-page .page-hero h1{font-size:76px}
+ .site-polished h1{font-size:58px}.site-polished h2{font-size:42px}.site-polished h3{font-size:27px}
+ .site-polished .container{padding-left:40px;padding-right:40px}
+ .site-polished .club-section{padding:76px 0}.site-polished .content-section{padding:66px 0}
+ .site-polished .club-masthead{grid-template-columns:auto 1fr auto}.site-polished .club-brand{grid-column:1}.site-polished .club-brand img{width:112px;height:80px}.site-polished .header-trial{grid-column:3}.site-polished .header-location{display:block;grid-column:2;grid-row:1;justify-self:center;margin:0;font-size:13px;line-height:1.6;color:#b7b8ba}.site-polished .header-location span{color:#7c7e83}
+ .site-polished .has-menu-js .club-menu-toggle{display:none}.site-polished .has-menu-js .club-navigation,.site-polished .has-menu-js[data-menu-open="true"] .club-navigation{display:block;animation:none}
+ .site-polished .club-nav-inner{flex-direction:row;gap:38px;padding-top:0;padding-bottom:0}.site-polished .club-navigation a{font-size:14px;min-height:50px;border:0;padding:10px 0;letter-spacing:0}.site-polished .club-navigation a::after{display:none}
+ .site-polished .club-navigation a[aria-current]{box-shadow:inset 0 -3px 0 var(--club-red)}
+ .site-polished .club-hero{padding:72px 0 75px;min-height:610px;display:flex;align-items:center}
+ .site-polished .hero-photo{inset:0 0 0 30%;height:auto}.site-polished .hero-photo img{object-position:50% center}.site-polished .hero-photo::after{background:linear-gradient(90deg,#101012 0%,rgba(16,16,18,.6) 20%,transparent 65%),linear-gradient(0deg,#101012 0%,transparent 40%)}
+ .site-polished .hero-copy{max-width:54%;position:relative}.site-polished .hero-copy h2{font-size:112px;line-height:.95;margin-bottom:28px}.site-polished .hero-copy>p{font-size:18px;max-width:37ch}.site-polished .hero-actions{gap:28px}
+ .site-polished .section-heading{margin-bottom:38px}.site-polished .section-heading h2{max-width:20ch}
+ .site-polished .classes-detail{margin-top:45px;padding-top:40px}
+ .site-polished .resource-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:45px}.site-polished .resource-card{padding:30px 0}
+ .site-polished #faq{padding:70px 0}.site-polished #faq>.container-fluid{padding:0 40px}.site-polished #faq .faq-section-right{display:grid;grid-template-columns:.8fr 1.2fr;gap:70px}
+ .site-polished .relocation-grid{grid-template-columns:1fr 1fr;gap:70px}.site-polished .map-responsive{height:330px}
+ .site-polished .page-hero.ds.ms{padding:57px 0 50px}.site-polished .page-hero h1{font-size:58px;max-width:22ch}.site-polished .page-hero .container>p:not(.breadcrumb-trail){font-size:19px}
+ .site-polished .info-grid{grid-template-columns:repeat(3,minmax(0,1fr));gap:0 32px}.site-polished .info-grid.two-col{grid-template-columns:repeat(2,minmax(0,1fr))}.site-polished .info-card{padding:30px 0}.site-polished .info-card h2,.site-polished .info-card h3{font-size:26px}
+ .site-polished .content-section .row{margin-left:-25px;margin-right:-25px}.site-polished .content-section .row>[class*='col-']{padding-left:25px;padding-right:25px}
+ .site-polished .class-detail-hero{padding:28px 0 55px}.site-polished .class-detail-grid{grid-template-columns:1.04fr 1fr;gap:55px;align-items:center}.site-polished .class-detail-copy h1{font-size:53px;max-width:17ch}.site-polished .class-detail-copy>p:not(.section-label){font-size:18px}
+ .site-polished .class-detail-photo{margin:0;width:100%}.site-polished .class-detail-photo img{height:410px;object-fit:cover}.site-polished .class-facts{max-width:none}.site-polished .class-detail-actions{margin-bottom:0}
+ .site-polished .class-body-grid{display:grid;grid-template-columns:minmax(0,1.7fr) minmax(0,1fr);gap:70px;align-items:start}.site-polished .class-article{grid-column:1;grid-row:1}.site-polished .first-class-panel{grid-column:2;grid-row:1;order:0;align-self:start;position:sticky;top:30px;padding:30px}.site-polished .first-class-panel h2{font-size:27px}.site-polished .class-alternatives{padding:55px 0 60px}
+ .site-polished .footer-grid{grid-template-columns:1.5fr .7fr 1fr;gap:70px}.site-polished .footer-identity{grid-column:auto}.site-polished .club-footer{padding:50px 0 25px}.site-polished .footer-associations{gap:40px;margin-top:35px}
+}
+@media(min-width:1200px){.site-polished .hero-copy h2{font-size:136px}.site-polished .hero-photo{left:34%}.site-polished .club-hero{min-height:650px}}
+@media(max-width:599px){
+ .site-polished .inline-links--navigation{display:flex;gap:8px 22px}
+ .site-polished .inline-links--navigation>.btn.btn-maincolor{flex-basis:100%;margin-bottom:4px}
+ .site-polished .inline-links--navigation>.btn.btn-outline-maincolor{width:auto;margin:0}
+ .site-polished .footer-identity p{display:none}
+ .site-polished .footer-associations{justify-content:flex-start;gap:28px;padding:20px 0}
+ .site-polished .footer-associations .association-name{display:none}
+ .site-polished .footer-associations img{width:36px;height:36px}
+ .site-polished .table-scroll{overflow:visible}.site-polished .pricing-table{display:block;min-width:0;background:transparent}
+ .site-polished .pricing-table thead{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
+ .site-polished .pricing-table tbody{display:grid;gap:20px}.site-polished .pricing-table tbody tr{display:grid;grid-template-columns:1fr 1fr;background:#1d1e1f;border-top:3px solid var(--club-red)}
+ .site-polished .pricing-table td{display:block;min-width:0;padding:16px 18px;border:0;font-size:15px}.site-polished .pricing-table td::before{content:attr(data-label);display:block;margin-bottom:7px;color:#bdbec1;font-size:12px;font-weight:400}
+ .site-polished .pricing-table td:first-child{grid-column:1 / -1;background:#292a2c;font-size:22px;font-weight:700}.site-polished .pricing-table td:first-child::before{display:none}
+ .site-polished .pricing-table td:nth-child(3):nth-last-child(2){grid-column:1 / -1;grid-row:3;padding-top:0}.site-polished .pricing-table td:first-child:nth-last-child(2)~td{grid-column:1 / -1}.site-polished .pricing-table td:last-child{white-space:normal}
+ .site-polished .inline-links{display:grid;grid-template-columns:minmax(0,1fr)}.site-polished .inline-links>.btn{width:100%;margin:0}.site-polished .class-detail-actions .text-link{justify-content:center}
+}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto!important}.site-polished *,.site-polished *::before,.site-polished *::after{animation:none!important;transition:none!important}}
